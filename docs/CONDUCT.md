@@ -81,3 +81,4 @@ Community leaders will follow these Community Impact Guidelines in determining t
 
 ![signature](https://github.com/user-attachments/assets/f5a83ab4-b2e2-44bd-af6a-5f38eb92fa4f)
 
+<img width="1989" height="999" alt="File_000" src="https://github.com/user-attachments/assets/0e698dd1-d0bf-4219-b105-db848a382fb5" />
