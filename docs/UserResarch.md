@@ -18,11 +18,13 @@
  
 - Observation 3:
 
-  - Observation Statement:
+  - Observation Statement: It seems like most people are just getting by managing savings or emergency savings. The most common finances they manage
+    are rent and student loans outside of this. 
 
-  - Supporting Data:
+  - Supporting Data: Nearly 40.0% answered emergeny savings, while student loans and rent followed in with 33% and 35% respectively. On the other hand, investments were rather low at 22.2%. 
 
-  - Team Action (if any):
+  - Team Action (if any): Prioritize Budget Stability Features and add Emergency Savings Progress Tracking:
+    In this stage people seem to care more about financial stability more than anything. 
 
 - Observation 4:
 
