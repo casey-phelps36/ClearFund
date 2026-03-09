@@ -75,6 +75,7 @@ Community leaders will follow these Community Impact Guidelines in determining t
 **Community Impact**: Demonstrating a pattern of violation of community standards, including sustained inappropriate behavior, harassment of an individual, or aggression toward or disparagement of classes of individuals.
 
 **Consequence**: A permanent ban from any sort of public interaction within the community.
+![Uploading IMG_1931.JPG…]()
 
 
 ## Team Member Signatures
@@ -82,3 +83,5 @@ Community leaders will follow these Community Impact Guidelines in determining t
 ![signature](https://github.com/user-attachments/assets/f5a83ab4-b2e2-44bd-af6a-5f38eb92fa4f)
 
 <img width="1989" height="999" alt="File_000" src="https://github.com/user-attachments/assets/0e698dd1-d0bf-4219-b105-db848a382fb5" />
+
+https://github.com/user-attachments/assets/0e698dd1-d0bf-4219-b105-db848a382fb5
