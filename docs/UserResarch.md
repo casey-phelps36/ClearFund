@@ -2,11 +2,11 @@
 
 - Observation 1:
 
-  - Observation Statement:
+  - Observation Statement: A common trend I am seeing is that users will sometimes go into their savings because they didn't save enough and ended up spending more than they should've.
 
-  - Supporting Data:
+  - Supporting Data: one user said "Not having organized spending and not looking at income versus spending" while another said "Forgetting what I'm currently subscribed too and losing money" 
 
-  - Team Action (if any):
+  - Team Action (if any):be able to provide users with their total subscriptions and bills coming up so that they exactly how much money to put a side and how much they will need for themselves.
 
 - Observation 2: 
 
