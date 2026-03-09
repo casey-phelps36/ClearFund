@@ -8,11 +8,11 @@
 
   - Team Action (if any):
 
-- Observation 2:
+- Observation 2: 
 
-  - Observation Statement:
+  - Observation Statement: A majority of potential users currently only use their bank app to track their money each month.
 
-  - Supporting Data:
+  - Supporting Data: 63% of responders said they only use a bank app, 31.5% of users said they don’t track their money at all, 11.1% said they use their notes app or a spread sheet, and the rest use other investment/budgeting apps. Some of the responders use a mix of the bank app and notes app/spreadsheet.
 
   - Team Action (if any):
  
