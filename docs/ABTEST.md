@@ -44,9 +44,13 @@ A/B Test 3
 
 
 A/B Test 4
-- A/B Test Name - 
-- User Story Number - 
-- Metrics - 
-- Hypothesis - 
-- Experiment - 
+- A/B Test Name — Plan Adjustment: Contribution Slider vs. Numeric Input with Live Preview
+- User Story Number — US4 - Scenario 3
+- Metrics — Plan Confirmation Rate (% of users who reach and tap the Confirm button after adjusting their contribution, with timeline update reflecting within 1 second)
+- Hypothesis — We believe that a typed numeric input paired with a live-updating goal preview will increase plan confirmation rate compared to a slider, because exact dollar input removes ambiguity and seeing the projected date update in real time gives users the confidence to commit.
+- Experiment - Split users 50/50 on the plan adjustment screen.
+  - Group A adjusts contribution via a draggable slider with real-time timeline update.
+  - Group B types an exact amount into a numeric field and sees a live preview card update (debounced at 300ms). Run for 4 weeks at 95% confidence.
 - Variations -
+  - Variant A: slider control, timeline updates as user drags, Confirm triggers auto-save.
+  - Variant B: numeric text input, live preview card updates as user types, Confirm triggers auto-save.
