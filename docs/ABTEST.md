@@ -87,13 +87,13 @@ A/B Test 3
 
 
 A/B Test 4
-- A/B Test Name - Plan Adjustment: Contribution Slider vs. Numeric Input with Live Preview
+- A/B Test Name - Plan Adjustment: Easy access dashboard editing VS Finance page editing
 - User Story Number - US4 - Scenario 3
-- Metrics — Plan Confirmation Rate (% of users who reach and tap the Confirm button after adjusting their contribution, with timeline update reflecting within 1 second)
-- Hypothesis - We believe that a typed numeric input paired with a live-updating goal preview will increase plan confirmation rate compared to a slider, because exact dollar input removes ambiguity and seeing the projected date update in real time gives users the confidence to commit.
-- Experiment - Split users 50/50 on the plan adjustment screen.
-  - Group A adjusts contribution via a draggable slider with real-time timeline update.
-  - Group B types an exact amount into a numeric field and sees a live preview card update (debounced at 300ms). Run for 4 weeks at 95% confidence.
+- Metrics — Financial Edit Completion Rate (% of users who successfully update a financial value such as income or spending and save the change within the same session)
+- Hypothesis - We believe that allowing users to edit financial values directly from the dashboard by clicking the relevant section will increase the financial edit completion rate compared to requiring users to navigate to the dedicated finance page, because editing in context reduces navigation friction and allows users to quickly adjust values where they are already viewing their financial overview.
+- Experiment - Split users 50/50 when they attempt to edit financial data.
+  - Group A edits financial values directly from the dashboard by clicking on the income or spending section.
+  - Group B must navigate to the finance page to edit those same values.
 - Variations -
-  - Variant A: slider control, timeline updates as user drags, Confirm triggers auto-save.
-  - Variant B: numeric text input, live preview card updates as user types, Confirm triggers auto-save.
+  - Variant A: Users click a section of the dashboard (e.g., income, spending, or budget card) to open an inline edit modal. Changes are saved directly from the dashboard.
+  - Variant B: Users click the Finance page, navigate to the appropriate field (income or spending), and edit the value there before saving.
