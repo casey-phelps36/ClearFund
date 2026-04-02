@@ -78,12 +78,23 @@ A/B Test 2
 
 
 A/B Test 3
-- A/B Test Name - 
-- User Story Number - 
-- Metrics - 
-- Hypothesis - 
-- Experiment - 
+- A/B Test Name - Goal Setup Guidance: Template Suggestions vs Blank Goal Entry
+- User Story Number - US3: Set Financial Goals
+- Metrics - Engagement – percentage of users who interact with the goal-setting feature
+Task Success – percentage of users who successfully create at least one financial goal
+Happiness – user confidence/satisfaction after setting a goal
+- Hypothesis - If users are shown suggested goal templates when creating a financial goal, they will be more likely to create a goal than users who must enter a goal completely from scratch, because templates reduce uncertainty and make the process feel easier.
+- Experiment - Using Firebase A/B Testing, users will be randomly split 50/50. One group will see suggested financial goal templates when opening the goal creation flow, while the other group will see a blank goal entry form. Firebase Analytics will track:
+goal_creation_start
+goal_template_selected
+goal_created
+goal_creation_abandoned
 - Variations -
+  - Variant A – Blank Goal Entry
+  Users see a standard empty form and type their financial goal manually.
+
+  - Variant B – Goal Templates
+  Users see suggested goal templates such as “Save $500,” “Reduce monthly spending,” or “Build an emergency fund,” and can choose one before editing details.
 
 
 A/B Test 4
