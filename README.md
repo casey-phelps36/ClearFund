@@ -1,6 +1,7 @@
 # ClearFund
 
-## Code of Conduct
+A new Flutter project.
 
-This project follows the Contributor Covenant Code of Conduct.  
-Please review it here: [Code of Conduct](docs/CONDUCT.md)
+## Getting Started
+
+FlutterFlow projects are built to run on the Flutter _stable_ release.
