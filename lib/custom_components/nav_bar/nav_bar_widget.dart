@@ -271,8 +271,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                   await authManager.signOut();
                   GoRouter.of(context).clearRedirectLocation();
 
-                  context.goNamedAuth(
-                      Dashboardv3Widget.routeName, context.mounted);
+                  context.goNamedAuth(LoginWidget.routeName, context.mounted);
                 },
                 child: Column(
                   mainAxisSize: MainAxisSize.min,

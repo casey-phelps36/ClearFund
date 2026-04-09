@@ -2137,66 +2137,6 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                       onPressed: () async {
                         logFirebaseEvent(
                             'FINANCE_INFO_SAVE_FINANCIAL_INFO_BTN_ON_');
-                        await Future.wait([
-                          Future(() async {
-                            logFirebaseEvent('Button_backend_call');
-
-                            await currentUserReference!
-                                .update(createUsersRecordData(
-                              monthlyIncome: _model.totalMonthlyIncome,
-                              savingGoal: _model.savingGoal,
-                              investmentGoal: _model.investment,
-                              additionalIncome: _model.additionalIncome,
-                              rent: _model.rent,
-                              groceries: _model.groceries,
-                              transportation: _model.transporation,
-                              monthlyDebt: _model.monthlyDebt,
-                              utilities: _model.utilities,
-                              monthlySalary: _model.monthlySalary,
-                              totalDebt: _model.totalDebt,
-                              availableSpendings: (_model.totalMonthlyIncome!) -
-                                  (_model.totalmonthlyExpenses!) -
-                                  valueOrDefault(
-                                      currentUserDocument?.totalExpenses, 0.0) -
-                                  (_model.totalSavings!),
-                              totalncome: FFAppState().totalMonthlyIncome,
-                              bills: _model.totalmonthlyExpenses,
-                            ));
-                          }),
-                          Future(() async {
-                            logFirebaseEvent('Button_update_app_state');
-                            FFAppState().monthlyIncome = _model.monthlySalary!;
-                            FFAppState().additionaMonthlylncome =
-                                _model.additionalIncome!;
-                            FFAppState().rent = _model.rent!;
-                            FFAppState().utility = _model.utilities!;
-                            FFAppState().groceries = _model.groceries!;
-                            FFAppState().transportation = _model.transporation!;
-                            FFAppState().monthlyDebt = _model.monthlyDebt!;
-                            FFAppState().totalMonthlyIncome =
-                                valueOrDefault<double>(
-                              ((_model.monthlySalary!)) +
-                                  ((_model.additionalIncome!)),
-                              0.0,
-                            );
-                            FFAppState().totalMonthlyCosts = ((_model.rent!)) +
-                                ((_model.groceries!)) +
-                                ((_model.transporation!)) +
-                                ((_model.utilities!)) +
-                                ((_model.monthlyDebt!));
-                            FFAppState().totalDebt = _model.totalDebt!;
-                            FFAppState().availableSpending = (_model
-                                    .totalMonthlyIncome!) -
-                                (_model.totalmonthlyExpenses!) -
-                                valueOrDefault(
-                                    currentUserDocument?.totalExpenses, 0.0) -
-                                (_model.totalSavings!);
-                            FFAppState().currentSavings = valueOrDefault(
-                                currentUserDocument?.currentSavings, 0.0);
-                            FFAppState().savingsGoal = valueOrDefault(
-                                currentUserDocument?.investmentAndGoals, 0.0);
-                          }),
-                        ]);
                         logFirebaseEvent('Button_google_analytics_event');
                         logFirebaseEvent(
                           'financeInput_1',
@@ -2204,6 +2144,60 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                             'Param 1': 'financeUpdate_page',
                           },
                         );
+                        logFirebaseEvent('Button_update_app_state');
+                        FFAppState().monthlyIncome = _model.monthlySalary!;
+                        FFAppState().additionaMonthlylncome =
+                            _model.additionalIncome!;
+                        FFAppState().rent = _model.rent!;
+                        FFAppState().utility = _model.utilities!;
+                        FFAppState().groceries = _model.groceries!;
+                        FFAppState().transportation = _model.transporation!;
+                        FFAppState().monthlyDebt = _model.monthlyDebt!;
+                        FFAppState().totalMonthlyIncome =
+                            valueOrDefault<double>(
+                          ((_model.monthlySalary!)) +
+                              ((_model.additionalIncome!)),
+                          0.0,
+                        );
+                        FFAppState().totalMonthlyCosts = ((_model.rent!)) +
+                            ((_model.groceries!)) +
+                            ((_model.transporation!)) +
+                            ((_model.utilities!)) +
+                            ((_model.monthlyDebt!));
+                        FFAppState().totalDebt = _model.totalDebt!;
+                        FFAppState().availableSpending =
+                            (_model.totalMonthlyIncome!) -
+                                (_model.totalmonthlyExpenses!) -
+                                valueOrDefault(
+                                    currentUserDocument?.totalExpenses, 0.0) -
+                                (_model.totalSavings!);
+                        FFAppState().currentSavings = valueOrDefault(
+                            currentUserDocument?.currentSavings, 0.0);
+                        FFAppState().savingsGoal = valueOrDefault(
+                            currentUserDocument?.investmentAndGoals, 0.0);
+                        logFirebaseEvent('Button_backend_call');
+
+                        await currentUserReference!
+                            .update(createUsersRecordData(
+                          monthlyIncome: _model.totalMonthlyIncome,
+                          savingGoal: _model.savingGoal,
+                          investmentGoal: _model.investment,
+                          additionalIncome: _model.additionalIncome,
+                          rent: _model.rent,
+                          groceries: _model.groceries,
+                          transportation: _model.transporation,
+                          monthlyDebt: _model.monthlyDebt,
+                          utilities: _model.utilities,
+                          monthlySalary: _model.monthlySalary,
+                          totalDebt: _model.totalDebt,
+                          availableSpendings: (_model.totalMonthlyIncome!) -
+                              (_model.totalmonthlyExpenses!) -
+                              valueOrDefault(
+                                  currentUserDocument?.totalExpenses, 0.0) -
+                              (_model.totalSavings!),
+                          totalncome: FFAppState().totalMonthlyIncome,
+                          bills: _model.totalmonthlyExpenses,
+                        ));
                         logFirebaseEvent('Button_navigate_to');
 
                         context.pushNamed(Dashboardv3Widget.routeName);

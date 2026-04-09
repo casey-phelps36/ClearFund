@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:clear_fund/flutter_flow/flutter_flow_icon_button.dart';
@@ -36,7 +37,7 @@ void main() async {
     testWidgets('finance update', (WidgetTester tester) async {
       _overrideOnError();
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: 'testing123@gmail.com', password: 'password');
+          email: 'test123@gmail.com', password: 'password');
       await tester.pumpWidget(ChangeNotifierProvider(
         create: (context) => FFAppState(),
         child: MyApp(
@@ -45,7 +46,11 @@ void main() async {
       ));
       await GoogleFonts.pendingFonts();
 
-      await tester.tap(find.text('Finance'));
+      await tester.tap(find.descendant(
+        of: find.byKey(const ValueKey('navBar_80i6')),
+        matching: find.byWidgetPredicate((Widget widget) =>
+            widget is FaIcon && widget.icon == FontAwesomeIcons.moneyCheckAlt),
+      ));
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       expect(find.text('Financial Info'), findsWidgets);
       await tester.enterText(
@@ -71,13 +76,16 @@ void main() async {
       await tester.pump(kDoubleTapMinTime);
       await tester.tap(find.byKey(const ValueKey('Button_yce1')));
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
-      expect(find.byKey(const ValueKey('\$')), findsNWidgets(8));
+      expect(find.byKey(const ValueKey('moneyavailable_o450')), findsOneWidget);
+      expect(find.byKey(const ValueKey('moneyavailable_xxo6')), findsOneWidget);
+      expect(find.byKey(const ValueKey('monthlyincome_6v4l')), findsOneWidget);
+      expect(find.byKey(const ValueKey('monthlyCosts_wqhm')), findsOneWidget);
     });
 
     testWidgets('widget finance update', (WidgetTester tester) async {
       _overrideOnError();
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: 'testing123@gmail.com', password: 'password');
+          email: 'test123@gmail.com', password: 'password');
       await tester.pumpWidget(ChangeNotifierProvider(
         create: (context) => FFAppState(),
         child: MyApp(
@@ -95,7 +103,9 @@ void main() async {
           find.bySemanticsLabel(RegExp('additionalIncome')), '1200');
       await tester.tap(find.text('Save'));
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
-      expect(find.byKey(const ValueKey('\$')), findsNWidgets(8));
+      expect(find.byKey(const ValueKey('moneyavailable_o450')), findsOneWidget);
+      expect(find.byKey(const ValueKey('moneyavailable_xxo6')), findsOneWidget);
+      expect(find.byKey(const ValueKey('monthlyincome_6v4l')), findsOneWidget);
     });
   });
 }

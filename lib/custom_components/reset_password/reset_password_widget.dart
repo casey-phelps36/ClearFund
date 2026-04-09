@@ -325,7 +325,8 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                 );
                 safeSetState(() {});
 
-                context.goNamedAuth(ProfileWidget.routeName, context.mounted);
+                context.goNamedAuth(
+                    Dashboardv3Widget.routeName, context.mounted);
               },
               text: 'Reset',
               options: FFButtonOptions(

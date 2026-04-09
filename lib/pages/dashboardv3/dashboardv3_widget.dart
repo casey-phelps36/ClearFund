@@ -155,6 +155,7 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                         ),
                         AuthUserStreamWidget(
                           builder: (context) => Text(
+                            key: ValueKey('moneyavailable_o450'),
                             '${formatNumber(
                               valueOrDefault(
                                       currentUserDocument?.totalncome, 0.0) -
@@ -208,6 +209,7 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                         ),
                         AuthUserStreamWidget(
                           builder: (context) => Text(
+                            key: ValueKey('moneyavailable_xxo6'),
                             '${formatNumber(
                               valueOrDefault(
                                   currentUserDocument?.availableSpendings, 0.0),
@@ -394,6 +396,8 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                             ),
                                             AuthUserStreamWidget(
                                               builder: (context) => Text(
+                                                key: ValueKey(
+                                                    'monthlyincome_6v4l'),
                                                 '${formatNumber(
                                                   valueOrDefault(
                                                       currentUserDocument
@@ -712,6 +716,8 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                           ),
                                           AuthUserStreamWidget(
                                             builder: (context) => Text(
+                                              key:
+                                                  ValueKey('monthlyCosts_wqhm'),
                                               '${formatNumber(
                                                 valueOrDefault(
                                                     currentUserDocument?.bills,
@@ -1600,7 +1606,9 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
               wrapWithModel(
                 model: _model.navBarModel,
                 updateCallback: () => safeSetState(() {}),
-                child: NavBarWidget(),
+                child: NavBarWidget(
+                  key: ValueKey('navBar_80i6'),
+                ),
               ),
             ],
           ),
