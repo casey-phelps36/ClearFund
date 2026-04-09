@@ -312,6 +312,7 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                               }
                             },
                             child: Container(
+                              key: ValueKey('Container_4ph9'),
                               width: 350.0,
                               decoration: BoxDecoration(
                                 color: Colors.white,

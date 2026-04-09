@@ -231,6 +231,7 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                                         ),
                                   ),
                                   TextFormField(
+                                    key: ValueKey('MonthlyCheck_lmjc'),
                                     controller:
                                         _model.monthlyCheckTextController,
                                     focusNode: _model.monthlyCheckFocusNode,
@@ -404,6 +405,7 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                                         ),
                                   ),
                                   TextFormField(
+                                    key: ValueKey('additionalIncome_dm9x'),
                                     controller:
                                         _model.additionalIncomeTextController,
                                     focusNode: _model.additionalIncomeFocusNode,
@@ -655,6 +657,7 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                                         ),
                                   ),
                                   TextFormField(
+                                    key: ValueKey('rent_f26p'),
                                     controller: _model.rentTextController,
                                     focusNode: _model.rentFocusNode,
                                     onChanged: (_) => EasyDebounce.debounce(
@@ -823,6 +826,7 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                                         ),
                                   ),
                                   TextFormField(
+                                    key: ValueKey('utilities_bac4'),
                                     controller: _model.utilitiesTextController,
                                     focusNode: _model.utilitiesFocusNode,
                                     onChanged: (_) => EasyDebounce.debounce(
@@ -993,6 +997,7 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                                         ),
                                   ),
                                   TextFormField(
+                                    key: ValueKey('foodGroceries_p64f'),
                                     controller:
                                         _model.foodGroceriesTextController,
                                     focusNode: _model.foodGroceriesFocusNode,
@@ -1164,6 +1169,7 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                                         ),
                                   ),
                                   TextFormField(
+                                    key: ValueKey('transportation_m4eo'),
                                     controller:
                                         _model.transportationTextController,
                                     focusNode: _model.transportationFocusNode,
@@ -1413,6 +1419,7 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                                         ),
                                   ),
                                   TextFormField(
+                                    key: ValueKey('monthlySavings_t4vo'),
                                     controller:
                                         _model.monthlySavingsTextController,
                                     focusNode: _model.monthlySavingsFocusNode,
@@ -1576,6 +1583,7 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                                         ),
                                   ),
                                   TextFormField(
+                                    key: ValueKey('investments_5a4k'),
                                     controller:
                                         _model.investmentsTextController,
                                     focusNode: _model.investmentsFocusNode,
@@ -1816,6 +1824,7 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                                         ),
                                   ),
                                   TextFormField(
+                                    key: ValueKey('totalDebt_h6yk'),
                                     controller: _model.totalDebtTextController,
                                     focusNode: _model.totalDebtFocusNode,
                                     onChanged: (_) => EasyDebounce.debounce(
@@ -2124,6 +2133,7 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                       ),
                     ),
                     FFButtonWidget(
+                      key: ValueKey('Button_yce1'),
                       onPressed: () async {
                         logFirebaseEvent(
                             'FINANCE_INFO_SAVE_FINANCIAL_INFO_BTN_ON_');
