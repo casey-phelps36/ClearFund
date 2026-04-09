@@ -1,4 +1,4 @@
 - <link to template slide> US1: User Account Creation
 - <link to template slide> US2: User Login
 - <link to template slide> US3: Backend Management
-- <link to template slide> US4: {Golden Path description}
+- <[link to template slide](https://docs.google.com/presentation/d/1tneQspqeIV4lJs6_T-Hdhsgb1fD_LvubCi4Bg3f6hFM/edit?usp=sharing)> US4: {Golden Path description}
