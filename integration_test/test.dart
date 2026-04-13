@@ -44,9 +44,17 @@ void main() async {
       ));
       await GoogleFonts.pendingFonts();
 
-      await tester.tap(find.text('Finance'));
+      await tester.tap(find.descendant(
+        of: find.byKey(const ValueKey('navBar_80i6')),
+        matching: find.byWidgetPredicate((Widget widget) =>
+            widget is FaIcon && widget.icon == FontAwesomeIcons.moneyCheckAlt),
+      ));
       await tester.pump(kDoubleTapMinTime);
-      await tester.tap(find.text('Finance'));
+      await tester.tap(find.descendant(
+        of: find.byKey(const ValueKey('navBar_80i6')),
+        matching: find.byWidgetPredicate((Widget widget) =>
+            widget is FaIcon && widget.icon == FontAwesomeIcons.moneyCheckAlt),
+      ));
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       expect(find.text('Financial Info'), findsWidgets);
     });
