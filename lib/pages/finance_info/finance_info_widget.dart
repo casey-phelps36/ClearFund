@@ -105,7 +105,6 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
             },
           ),
           title: Text(
-            key: ValueKey('Text_i0r8'),
             'Financial Info',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   font: GoogleFonts.roboto(
@@ -2198,6 +2197,7 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                               (_model.totalSavings!),
                           totalncome: FFAppState().totalMonthlyIncome,
                           bills: _model.totalmonthlyExpenses,
+                          investmentAndGoals: _model.totalSavings,
                         ));
                         logFirebaseEvent('Button_navigate_to');
 

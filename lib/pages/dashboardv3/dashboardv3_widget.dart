@@ -131,6 +131,7 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                   child: Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Column(
+                      key: ValueKey('Column_73q5'),
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -156,7 +157,7 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                         AuthUserStreamWidget(
                           builder: (context) => Text(
                             key: ValueKey('moneyavailable_o450'),
-                            '${formatNumber(
+                            formatNumber(
                               valueOrDefault(
                                       currentUserDocument?.totalncome, 0.0) -
                                   valueOrDefault(
@@ -167,7 +168,7 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                               formatType: FormatType.decimal,
                               decimalType: DecimalType.automatic,
                               currency: '',
-                            )}',
+                            ),
                             style: FlutterFlowTheme.of(context)
                                 .displayLarge
                                 .override(
@@ -210,13 +211,13 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                         AuthUserStreamWidget(
                           builder: (context) => Text(
                             key: ValueKey('moneyavailable_xxo6'),
-                            '${formatNumber(
+                            formatNumber(
                               valueOrDefault(
                                   currentUserDocument?.availableSpendings, 0.0),
                               formatType: FormatType.decimal,
                               decimalType: DecimalType.automatic,
                               currency: '',
-                            )}',
+                            ),
                             style: FlutterFlowTheme.of(context)
                                 .displayLarge
                                 .override(
@@ -398,7 +399,7 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                               builder: (context) => Text(
                                                 key: ValueKey(
                                                     'monthlyincome_6v4l'),
-                                                '${formatNumber(
+                                                formatNumber(
                                                   valueOrDefault(
                                                       currentUserDocument
                                                           ?.totalncome,
@@ -408,7 +409,7 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                                   decimalType:
                                                       DecimalType.automatic,
                                                   currency: '',
-                                                )}',
+                                                ),
                                                 style: FlutterFlowTheme.of(
                                                         context)
                                                     .headlineMedium
@@ -523,7 +524,7 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                         ),
                                         AuthUserStreamWidget(
                                           builder: (context) => Text(
-                                            '${formatNumber(
+                                            formatNumber(
                                               valueOrDefault(
                                                   currentUserDocument
                                                       ?.totalExpenses,
@@ -532,7 +533,7 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                               decimalType:
                                                   DecimalType.automatic,
                                               currency: '',
-                                            )}',
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .headlineSmall
                                                 .override(
@@ -646,6 +647,7 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                     }
                                   },
                                   child: Container(
+                                    key: ValueKey('Container_r84z'),
                                     width:
                                         MediaQuery.sizeOf(context).width * 0.5,
                                     constraints: BoxConstraints(
@@ -716,9 +718,7 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                           ),
                                           AuthUserStreamWidget(
                                             builder: (context) => Text(
-                                              key:
-                                                  ValueKey('monthlyCosts_wqhm'),
-                                              '${formatNumber(
+                                              formatNumber(
                                                 valueOrDefault(
                                                     currentUserDocument?.bills,
                                                     0.0),
@@ -726,7 +726,7 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                                 decimalType:
                                                     DecimalType.automatic,
                                                 currency: '',
-                                              )}',
+                                              ),
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .headlineSmall
@@ -1006,16 +1006,16 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                         ),
                                         AuthUserStreamWidget(
                                           builder: (context) => Text(
-                                            '${formatNumber(
+                                            formatNumber(
                                               valueOrDefault(
                                                   currentUserDocument
-                                                      ?.savingGoal,
+                                                      ?.currentSavings,
                                                   0.0),
                                               formatType: FormatType.decimal,
                                               decimalType:
                                                   DecimalType.automatic,
                                               currency: '',
-                                            )}',
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .titleMedium
                                                 .override(
@@ -1147,16 +1147,16 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                         ),
                                         AuthUserStreamWidget(
                                           builder: (context) => Text(
-                                            '${formatNumber(
+                                            formatNumber(
                                               valueOrDefault(
                                                   currentUserDocument
-                                                      ?.investmentGoal,
+                                                      ?.currentInvestment,
                                                   0.0),
                                               formatType: FormatType.decimal,
                                               decimalType:
                                                   DecimalType.automatic,
                                               currency: '',
-                                            )}',
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .titleMedium
                                                 .override(
@@ -1219,8 +1219,21 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                           builder: (context) => Text(
                                             '${formatNumber(
                                               valueOrDefault(
+                                                      currentUserDocument
+                                                          ?.currentInvestment,
+                                                      0.0) +
+                                                  valueOrDefault(
+                                                      currentUserDocument
+                                                          ?.currentSavings,
+                                                      0.0),
+                                              formatType: FormatType.decimal,
+                                              decimalType:
+                                                  DecimalType.automatic,
+                                              currency: '',
+                                            )}/${formatNumber(
+                                              valueOrDefault(
                                                   currentUserDocument
-                                                      ?.totalExpenses,
+                                                      ?.investmentAndGoals,
                                                   0.0),
                                               formatType: FormatType.decimal,
                                               decimalType:

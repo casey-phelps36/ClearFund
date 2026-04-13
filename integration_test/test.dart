@@ -34,6 +34,25 @@ void main() async {
   });
 
   group('Us4', () {
+    testWidgets('naviage to finance', (WidgetTester tester) async {
+      _overrideOnError();
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: 'testing123@gmail.com', password: 'password');
+      await tester.pumpWidget(ChangeNotifierProvider(
+        create: (context) => FFAppState(),
+        child: const MyApp(),
+      ));
+      await GoogleFonts.pendingFonts();
+
+      await tester.tap(find.byWidgetPredicate((Widget widget) =>
+          widget is FaIcon && widget.icon == FontAwesomeIcons.moneyCheckAlt));
+      await tester.pump(kDoubleTapMinTime);
+      await tester.tap(find.byWidgetPredicate((Widget widget) =>
+          widget is FaIcon && widget.icon == FontAwesomeIcons.moneyCheckAlt));
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
+      expect(find.text('Financial Info'), findsWidgets);
+    });
+
     testWidgets('finance update', (WidgetTester tester) async {
       _overrideOnError();
       await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -46,7 +65,6 @@ void main() async {
       ));
       await GoogleFonts.pendingFonts();
 
-      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.tap(find.descendant(
         of: find.byKey(const ValueKey('navBar_80i6')),
         matching: find.byWidgetPredicate((Widget widget) =>
@@ -55,41 +73,55 @@ void main() async {
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(
           find.byKey(const ValueKey('MonthlyCheck_lmjc')), '5000');
-      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(
           find.byKey(const ValueKey('additionalIncome_dm9x')), '1200');
-      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(find.byKey(const ValueKey('rent_f26p')), '1500');
-      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(
           find.byKey(const ValueKey('utilities_bac4')), '300');
-      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(
           find.byKey(const ValueKey('foodGroceries_p64f')), '600');
-      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(
           find.byKey(const ValueKey('transportation_m4eo')), '250');
-      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(
           find.byKey(const ValueKey('monthlySavings_t4vo')), '800');
-      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(
           find.byKey(const ValueKey('investments_5a4k')), '500');
-      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(
           find.byKey(const ValueKey('totalDebt_h6yk')), '12000');
-      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(
           find.byKey(const ValueKey('financeInfo_jq67')), '400');
-      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.tap(find.byKey(const ValueKey('Button_yce1')));
       await tester.pump(kDoubleTapMinTime);
       await tester.tap(find.byKey(const ValueKey('Button_yce1')));
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
-      expect(find.byKey(const ValueKey('moneyavailable_o450')), findsWidgets);
-      expect(find.byKey(const ValueKey('moneyavailable_xxo6')), findsWidgets);
-      expect(find.byKey(const ValueKey('monthlyincome_6v4l')), findsWidgets);
-      expect(find.byKey(const ValueKey('monthlyCosts_wqhm')), findsWidgets);
+      expect(
+        find.descendant(
+          of: find.byKey(const ValueKey('Column_73q5')),
+          matching: find.byKey(const ValueKey('1850')),
+        ),
+        findsWidgets,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(const ValueKey('Column_73q5')),
+          matching: find.byKey(const ValueKey('1850')),
+        ),
+        findsWidgets,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(const ValueKey('Container_4ph9')),
+          matching: find.byKey(const ValueKey('6200')),
+        ),
+        findsWidgets,
+      );
+      expect(
+        find.descendant(
+          of: find.byKey(const ValueKey('Container_r84z')),
+          matching: find.byKey(const ValueKey('3050')),
+        ),
+        findsWidgets,
+      );
     }, skip: true);
 
     testWidgets('widget finance update', (WidgetTester tester) async {
@@ -118,26 +150,6 @@ void main() async {
       expect(find.byKey(const ValueKey('moneyavailable_xxo6')), findsOneWidget);
       expect(find.byKey(const ValueKey('monthlyincome_6v4l')), findsOneWidget);
     }, skip: true);
-
-    testWidgets('naviage to finance', (WidgetTester tester) async {
-      _overrideOnError();
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: 'testing123@gmail.com', password: 'password');
-      await tester.pumpWidget(ChangeNotifierProvider(
-        create: (context) => FFAppState(),
-        child: const MyApp(),
-      ));
-      await GoogleFonts.pendingFonts();
-
-      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
-      await tester.tap(find.byWidgetPredicate((Widget widget) =>
-          widget is FaIcon && widget.icon == FontAwesomeIcons.moneyCheckAlt));
-      await tester.pump(kDoubleTapMinTime);
-      await tester.tap(find.byWidgetPredicate((Widget widget) =>
-          widget is FaIcon && widget.icon == FontAwesomeIcons.moneyCheckAlt));
-      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
-      expect(find.byKey(const ValueKey('Text_i0r8')), findsWidgets);
-    });
   });
 }
 
@@ -163,11 +175,7 @@ bool _shouldIgnoreError(String error) {
   if (error.contains('overflowed by')) {
     return true;
   }
-  // Sometimes some images fail to load, it generally does not break the test.
-  if (error.contains('No host specified in URI') ||
-      error.contains('EXCEPTION CAUGHT BY IMAGE RESOURCE SERVICE')) {
-    return true;
-  }
+
   // These errors should be avoided, but they should not break the test.
   if (error.contains('setState() called after dispose()')) {
     return true;
