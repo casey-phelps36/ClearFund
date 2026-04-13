@@ -37,18 +37,16 @@ void main() async {
     testWidgets('naviage to finance', (WidgetTester tester) async {
       _overrideOnError();
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: 'testing123@gmail.com', password: 'password');
+          email: 'test@test.com', password: 'password');
       await tester.pumpWidget(ChangeNotifierProvider(
         create: (context) => FFAppState(),
         child: const MyApp(),
       ));
       await GoogleFonts.pendingFonts();
 
-      await tester.tap(find.byWidgetPredicate((Widget widget) =>
-          widget is FaIcon && widget.icon == FontAwesomeIcons.moneyCheckAlt));
+      await tester.tap(find.text('Finance'));
       await tester.pump(kDoubleTapMinTime);
-      await tester.tap(find.byWidgetPredicate((Widget widget) =>
-          widget is FaIcon && widget.icon == FontAwesomeIcons.moneyCheckAlt));
+      await tester.tap(find.text('Finance'));
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       expect(find.text('Financial Info'), findsWidgets);
     });
