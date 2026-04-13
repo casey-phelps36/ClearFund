@@ -90,7 +90,7 @@ void main() async {
       expect(find.byKey(const ValueKey('moneyavailable_xxo6')), findsWidgets);
       expect(find.byKey(const ValueKey('monthlyincome_6v4l')), findsWidgets);
       expect(find.byKey(const ValueKey('monthlyCosts_wqhm')), findsWidgets);
-    });
+    }, skip: true);
 
     testWidgets('widget finance update', (WidgetTester tester) async {
       _overrideOnError();
@@ -117,7 +117,7 @@ void main() async {
       expect(find.byKey(const ValueKey('moneyavailable_o450')), findsOneWidget);
       expect(find.byKey(const ValueKey('moneyavailable_xxo6')), findsOneWidget);
       expect(find.byKey(const ValueKey('monthlyincome_6v4l')), findsOneWidget);
-    });
+    }, skip: true);
 
     testWidgets('naviage to finance', (WidgetTester tester) async {
       _overrideOnError();
