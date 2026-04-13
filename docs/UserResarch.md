@@ -1,0 +1,35 @@
+# User Research Observations
+
+- Observation 1:
+
+  - Observation Statement: A common trend I am seeing is that users will sometimes go into their savings because they didn't save enough and ended up spending more than they should've.
+
+  - Supporting Data: one user said "Not having organized spending and not looking at income versus spending" while another said "Forgetting what I'm currently subscribed too and losing money" 
+
+  - Team Action (if any):be able to provide users with their total subscriptions and bills coming up so that they exactly how much money to put a side and how much they will need for themselves.
+
+- Observation 2: 
+
+  - Observation Statement: A majority of potential users currently only use their bank app to track their money each month.
+
+  - Supporting Data: 63% of responders said they only use a bank app, 31.5% of users said they don’t track their money at all, 11.1% said they use their notes app or a spread sheet, and the rest use other investment/budgeting apps. Some of the responders use a mix of the bank app and notes app/spreadsheet.
+
+  - Team Action (if any):
+ 
+- Observation 3:
+
+  - Observation Statement: It seems like most people are just getting by managing savings or emergency savings. The most common finances they manage
+    are rent and student loans outside of this. 
+
+  - Supporting Data: Nearly 40.0% answered emergeny savings, while student loans and rent followed in with 33% and 35% respectively. On the other hand, investments were rather low at 22.2%. 
+
+  - Team Action (if any): Prioritize Budget Stability Features and add Emergency Savings Progress Tracking:
+    In this stage people seem to care more about financial stability more than anything. 
+
+- Observation 4:
+
+  - Observation Statement: Users' main concerns would be a subscription-based app and the amount of manual entries
+
+  - Supporting Data: 44.4% (24 users) say chose "too many manual entries" and 48.1% (26 users) say "cost/subscription concerns" when prompted the question "What would stop you from using an app like ClearFund?" The total amount of responses was 54 responses.
+
+  - Team Action (if any):
