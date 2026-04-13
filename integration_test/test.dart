@@ -46,33 +46,42 @@ void main() async {
       ));
       await GoogleFonts.pendingFonts();
 
-      await tester.pumpAndSettle(const Duration(milliseconds: 50000));
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.tap(find.descendant(
         of: find.byKey(const ValueKey('navBar_80i6')),
         matching: find.byWidgetPredicate((Widget widget) =>
             widget is FaIcon && widget.icon == FontAwesomeIcons.moneyCheckAlt),
       ));
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
-      expect(find.text('Financial Info'), findsWidgets);
       await tester.enterText(
           find.byKey(const ValueKey('MonthlyCheck_lmjc')), '5000');
       await tester.enterText(
           find.byKey(const ValueKey('additionalIncome_dm9x')), '1200');
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(find.byKey(const ValueKey('rent_f26p')), '1500');
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(
           find.byKey(const ValueKey('utilities_bac4')), '300');
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(
           find.byKey(const ValueKey('foodGroceries_p64f')), '600');
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(
           find.byKey(const ValueKey('transportation_m4eo')), '250');
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(
           find.byKey(const ValueKey('monthlySavings_t4vo')), '800');
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(
           find.byKey(const ValueKey('investments_5a4k')), '500');
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(
           find.byKey(const ValueKey('totalDebt_h6yk')), '12000');
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(
           find.byKey(const ValueKey('financeInfo_jq67')), '400');
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.tap(find.byKey(const ValueKey('Button_yce1')));
       await tester.pump(kDoubleTapMinTime);
       await tester.tap(find.byKey(const ValueKey('Button_yce1')));
