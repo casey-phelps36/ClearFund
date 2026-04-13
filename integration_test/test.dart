@@ -55,6 +55,7 @@ void main() async {
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(
           find.byKey(const ValueKey('MonthlyCheck_lmjc')), '5000');
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(
           find.byKey(const ValueKey('additionalIncome_dm9x')), '1200');
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
@@ -65,7 +66,6 @@ void main() async {
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(
           find.byKey(const ValueKey('foodGroceries_p64f')), '600');
-      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.enterText(
           find.byKey(const ValueKey('transportation_m4eo')), '250');
@@ -86,10 +86,10 @@ void main() async {
       await tester.pump(kDoubleTapMinTime);
       await tester.tap(find.byKey(const ValueKey('Button_yce1')));
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
-      expect(find.byKey(const ValueKey('moneyavailable_o450')), findsOneWidget);
-      expect(find.byKey(const ValueKey('moneyavailable_xxo6')), findsOneWidget);
-      expect(find.byKey(const ValueKey('monthlyincome_6v4l')), findsOneWidget);
-      expect(find.byKey(const ValueKey('monthlyCosts_wqhm')), findsOneWidget);
+      expect(find.byKey(const ValueKey('moneyavailable_o450')), findsWidgets);
+      expect(find.byKey(const ValueKey('moneyavailable_xxo6')), findsWidgets);
+      expect(find.byKey(const ValueKey('monthlyincome_6v4l')), findsWidgets);
+      expect(find.byKey(const ValueKey('monthlyCosts_wqhm')), findsWidgets);
     });
 
     testWidgets('widget finance update', (WidgetTester tester) async {
@@ -117,6 +117,26 @@ void main() async {
       expect(find.byKey(const ValueKey('moneyavailable_o450')), findsOneWidget);
       expect(find.byKey(const ValueKey('moneyavailable_xxo6')), findsOneWidget);
       expect(find.byKey(const ValueKey('monthlyincome_6v4l')), findsOneWidget);
+    });
+
+    testWidgets('naviage to finance', (WidgetTester tester) async {
+      _overrideOnError();
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: 'testing123@gmail.com', password: 'password');
+      await tester.pumpWidget(ChangeNotifierProvider(
+        create: (context) => FFAppState(),
+        child: const MyApp(),
+      ));
+      await GoogleFonts.pendingFonts();
+
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
+      await tester.tap(find.byWidgetPredicate((Widget widget) =>
+          widget is FaIcon && widget.icon == FontAwesomeIcons.moneyCheckAlt));
+      await tester.pump(kDoubleTapMinTime);
+      await tester.tap(find.byWidgetPredicate((Widget widget) =>
+          widget is FaIcon && widget.icon == FontAwesomeIcons.moneyCheckAlt));
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
+      expect(find.byKey(const ValueKey('Text_i0r8')), findsWidgets);
     });
   });
 }

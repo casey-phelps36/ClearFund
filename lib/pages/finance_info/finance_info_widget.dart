@@ -105,6 +105,7 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
             },
           ),
           title: Text(
+            key: ValueKey('Text_i0r8'),
             'Financial Info',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   font: GoogleFonts.roboto(
