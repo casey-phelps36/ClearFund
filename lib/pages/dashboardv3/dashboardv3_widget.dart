@@ -285,7 +285,7 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                             onTap: () async {
                               logFirebaseEvent(
                                   'DASHBOARDV3_Container_rt0kg9d5_ON_TAP');
-                              if (getRemoteConfigBool('dashboardUpdate')) {
+                              if (!getRemoteConfigBool('dashboardUpdate')) {
                                 logFirebaseEvent('Container_bottom_sheet');
                                 await showModalBottomSheet(
                                   isScrollControlled: true,
