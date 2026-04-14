@@ -40,7 +40,9 @@ void main() async {
           email: 'test@test.com', password: 'password');
       await tester.pumpWidget(ChangeNotifierProvider(
         create: (context) => FFAppState(),
-        child: const MyApp(),
+        child: MyApp(
+          entryPage: Dashboardv3Widget(),
+        ),
       ));
       await GoogleFonts.pendingFonts();
 
