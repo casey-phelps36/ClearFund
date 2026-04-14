@@ -131,7 +131,6 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                   child: Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Column(
-                      key: ValueKey('Column_73q5'),
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -449,6 +448,7 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
+                            key: ValueKey('Row_9h3c'),
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -647,7 +647,6 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                     }
                                   },
                                   child: Container(
-                                    key: ValueKey('Container_r84z'),
                                     width:
                                         MediaQuery.sizeOf(context).width * 0.5,
                                     constraints: BoxConstraints(
@@ -718,6 +717,8 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                           ),
                                           AuthUserStreamWidget(
                                             builder: (context) => Text(
+                                              key:
+                                                  ValueKey('monthlyCosts_wqhm'),
                                               formatNumber(
                                                 valueOrDefault(
                                                     currentUserDocument?.bills,

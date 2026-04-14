@@ -445,73 +445,66 @@ class _IncomeComponentWidgetState extends State<IncomeComponentWidget> {
               ),
               Align(
                 alignment: AlignmentDirectional(0.0, 0.0),
-                child: Semantics(
-                  label: 'updateIncomeCom',
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      logFirebaseEvent(
-                          'INCOME_COMPONENT_updateIncomeCom_ON_TAP');
-                      logFirebaseEvent(
-                          'updateIncomeCom_google_analytics_event');
-                      logFirebaseEvent(
-                        'dashboard_Update',
-                        parameters: {
-                          'Param 11': 'dashboard_income',
-                        },
-                      );
-                      logFirebaseEvent('updateIncomeCom_update_app_state');
-                      FFAppState().availableSpending =
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    logFirebaseEvent('INCOME_COMPONENT_updateIncomeCom_ON_TAP');
+                    logFirebaseEvent('updateIncomeCom_google_analytics_event');
+                    logFirebaseEvent(
+                      'dashboard_Update',
+                      parameters: {
+                        'Param 11': 'dashboard_income',
+                      },
+                    );
+                    logFirebaseEvent('updateIncomeCom_update_app_state');
+                    FFAppState().availableSpending =
+                        valueOrDefault(currentUserDocument?.totalncome, 0.0) -
+                            valueOrDefault(currentUserDocument?.bills, 0.0) -
+                            valueOrDefault(
+                                currentUserDocument?.totalExpenses, 0.0) -
+                            valueOrDefault(
+                                currentUserDocument?.investmentAndGoals, 0.0);
+                    FFAppState().update(() {});
+                    logFirebaseEvent('updateIncomeCom_backend_call');
+
+                    await currentUserReference!.update(createUsersRecordData(
+                      availableSpendings:
                           valueOrDefault(currentUserDocument?.totalncome, 0.0) -
                               valueOrDefault(currentUserDocument?.bills, 0.0) -
                               valueOrDefault(
                                   currentUserDocument?.totalExpenses, 0.0) -
                               valueOrDefault(
-                                  currentUserDocument?.investmentAndGoals, 0.0);
-                      FFAppState().update(() {});
-                      logFirebaseEvent('updateIncomeCom_backend_call');
-
-                      await currentUserReference!.update(createUsersRecordData(
-                        availableSpendings: valueOrDefault(
-                                currentUserDocument?.totalncome, 0.0) -
-                            valueOrDefault(currentUserDocument?.bills, 0.0) -
-                            valueOrDefault(
-                                currentUserDocument?.totalExpenses, 0.0) -
-                            valueOrDefault(
-                                currentUserDocument?.investmentAndGoals, 0.0),
-                      ));
-                      logFirebaseEvent('updateIncomeCom_bottom_sheet');
-                      Navigator.pop(context);
-                    },
-                    text: 'Save',
-                    options: FFButtonOptions(
-                      height: 40.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                font: GoogleFonts.roboto(
-                                  fontWeight: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .fontWeight,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .fontStyle,
-                                ),
-                                color: Colors.white,
-                                letterSpacing: 0.0,
-                                fontWeight: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .fontWeight,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .fontStyle,
-                              ),
-                      elevation: 0.0,
-                      borderRadius: BorderRadius.circular(24.0),
-                    ),
+                                  currentUserDocument?.investmentAndGoals, 0.0),
+                    ));
+                    logFirebaseEvent('updateIncomeCom_bottom_sheet');
+                    Navigator.pop(context);
+                  },
+                  text: 'Save',
+                  options: FFButtonOptions(
+                    height: 40.0,
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          font: GoogleFonts.roboto(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .fontStyle,
+                          ),
+                          color: Colors.white,
+                          letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                        ),
+                    elevation: 0.0,
+                    borderRadius: BorderRadius.circular(24.0),
                   ),
                 ),
               ),

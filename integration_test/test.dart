@@ -100,29 +100,43 @@ void main() async {
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       expect(
         find.descendant(
-          of: find.byKey(const ValueKey('Column_73q5')),
-          matching: find.byKey(const ValueKey('1850')),
+          of: find.byKey(const ValueKey('moneyavailable_o450')),
+          matching: find.text('\$1,850'),
         ),
         findsWidgets,
       );
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       expect(
         find.descendant(
-          of: find.byKey(const ValueKey('Column_73q5')),
-          matching: find.byKey(const ValueKey('1850')),
+          of: find.byKey(const ValueKey('moneyavailable_xxo6')),
+          matching: find.text('\$1,850'),
         ),
         findsWidgets,
       );
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       expect(
         find.descendant(
-          of: find.byKey(const ValueKey('Container_4ph9')),
-          matching: find.byKey(const ValueKey('6200')),
+          of: find.byKey(const ValueKey('monthlyincome_6v4l')),
+          matching: find.text('\$6,200'),
         ),
         findsWidgets,
       );
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
+      await tester.scrollUntilVisible(
+        find.byKey(const ValueKey('Row_9h3c')),
+        100.0,
+        scrollable: find
+            .descendant(
+              of: find.byKey(const ValueKey('monthlyCosts_wqhm')),
+              matching: find.byType(Scrollable),
+            )
+            .first,
+      );
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       expect(
         find.descendant(
-          of: find.byKey(const ValueKey('Container_r84z')),
-          matching: find.byKey(const ValueKey('3050')),
+          of: find.byKey(const ValueKey('monthlyCosts_wqhm')),
+          matching: find.text('\$3,050'),
         ),
         findsWidgets,
       );
@@ -145,14 +159,34 @@ void main() async {
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       expect(find.text('Monthly Salary'), findsWidgets);
       await tester.enterText(
-          find.bySemanticsLabel(RegExp('MonthlyCheck')), '5000');
+          find.bySemanticsLabel(RegExp('MonthlyCheck')), '6000');
       await tester.enterText(
           find.bySemanticsLabel(RegExp('additionalIncome')), '1200');
-      await tester.tap(find.bySemanticsLabel(RegExp('updateIncomeCom')));
+      await tester.tap(find.text('Save'));
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
-      expect(find.byKey(const ValueKey('moneyavailable_o450')), findsOneWidget);
-      expect(find.byKey(const ValueKey('moneyavailable_xxo6')), findsOneWidget);
-      expect(find.byKey(const ValueKey('monthlyincome_6v4l')), findsOneWidget);
+      expect(
+        find.descendant(
+          of: find.byKey(const ValueKey('dashboardv3_n8td')),
+          matching: find.text('\$2,850'),
+        ),
+        findsOneWidget,
+      );
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
+      expect(
+        find.descendant(
+          of: find.byKey(const ValueKey('moneyavailable_xxo6')),
+          matching: find.text('\$2,850'),
+        ),
+        findsOneWidget,
+      );
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
+      expect(
+        find.descendant(
+          of: find.byKey(const ValueKey('monthlyincome_6v4l')),
+          matching: find.text('\$7,200'),
+        ),
+        findsOneWidget,
+      );
     });
   });
 }
