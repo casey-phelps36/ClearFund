@@ -52,12 +52,6 @@ void main() async {
         matching: find.byWidgetPredicate((Widget widget) =>
             widget is FaIcon && widget.icon == FontAwesomeIcons.moneyCheckAlt),
       ));
-      await tester.pump(kDoubleTapMinTime);
-      await tester.tap(find.descendant(
-        of: find.byKey(const ValueKey('navBar_80i6')),
-        matching: find.byWidgetPredicate((Widget widget) =>
-            widget is FaIcon && widget.icon == FontAwesomeIcons.moneyCheckAlt),
-      ));
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       expect(find.text('Financial Info'), findsWidgets);
     });
@@ -154,7 +148,7 @@ void main() async {
           find.bySemanticsLabel(RegExp('MonthlyCheck')), '5000');
       await tester.enterText(
           find.bySemanticsLabel(RegExp('additionalIncome')), '1200');
-      await tester.tap(find.text('Save'));
+      await tester.tap(find.bySemanticsLabel(RegExp('updateIncomeCom')));
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       expect(find.byKey(const ValueKey('moneyavailable_o450')), findsOneWidget);
       expect(find.byKey(const ValueKey('moneyavailable_xxo6')), findsOneWidget);

@@ -146,60 +146,121 @@ class _IncomeComponentWidgetState extends State<IncomeComponentWidget> {
                               .fontStyle,
                         ),
                   ),
-                  TextFormField(
-                    controller: _model.monthlyCheckTextController,
-                    focusNode: _model.monthlyCheckFocusNode,
-                    onChanged: (_) => EasyDebounce.debounce(
-                      '_model.monthlyCheckTextController',
-                      Duration(milliseconds: 2000),
-                      () async {
-                        logFirebaseEvent(
-                            'INCOME_COMPONENT_MonthlyCheck_ON_TEXTFIE');
-                        logFirebaseEvent('MonthlyCheck_backend_call');
+                  Semantics(
+                    label: 'MonthlyCheck',
+                    child: TextFormField(
+                      controller: _model.monthlyCheckTextController,
+                      focusNode: _model.monthlyCheckFocusNode,
+                      onChanged: (_) => EasyDebounce.debounce(
+                        '_model.monthlyCheckTextController',
+                        Duration(milliseconds: 2000),
+                        () async {
+                          logFirebaseEvent(
+                              'INCOME_COMPONENT_MonthlyCheck_ON_TEXTFIE');
+                          logFirebaseEvent('MonthlyCheck_backend_call');
 
-                        await currentUserReference!
-                            .update(createUsersRecordData(
-                          monthlyIncome: double.tryParse(
-                              _model.monthlyCheckTextController.text),
-                        ));
-                        logFirebaseEvent('MonthlyCheck_backend_call');
+                          await currentUserReference!
+                              .update(createUsersRecordData(
+                            monthlyIncome: double.tryParse(
+                                _model.monthlyCheckTextController.text),
+                          ));
+                          logFirebaseEvent('MonthlyCheck_backend_call');
 
-                        await currentUserReference!
-                            .update(createUsersRecordData(
-                          totalncome: valueOrDefault(
+                          await currentUserReference!
+                              .update(createUsersRecordData(
+                            totalncome: valueOrDefault(
+                                    currentUserDocument?.monthlyIncome, 0.0) +
+                                valueOrDefault(
+                                    currentUserDocument?.additionalIncome, 0.0),
+                          ));
+                          logFirebaseEvent('MonthlyCheck_backend_call');
+
+                          await currentUserReference!
+                              .update(createUsersRecordData(
+                            availableSpendings: valueOrDefault(
+                                    currentUserDocument?.totalncome, 0.0) -
+                                valueOrDefault(
+                                    currentUserDocument?.bills, 0.0) -
+                                valueOrDefault(
+                                    currentUserDocument?.totalExpenses, 0.0) -
+                                valueOrDefault(
+                                    currentUserDocument?.investmentAndGoals,
+                                    0.0),
+                          ));
+                          logFirebaseEvent('MonthlyCheck_update_app_state');
+                          FFAppState().monthlyIncome = double.parse(
+                              _model.monthlyCheckTextController.text);
+                          FFAppState().totalMonthlyIncome = valueOrDefault(
                                   currentUserDocument?.monthlyIncome, 0.0) +
                               valueOrDefault(
-                                  currentUserDocument?.additionalIncome, 0.0),
-                        ));
-                        logFirebaseEvent('MonthlyCheck_backend_call');
-
-                        await currentUserReference!
-                            .update(createUsersRecordData(
-                          availableSpendings: valueOrDefault(
-                                  currentUserDocument?.totalncome, 0.0) -
-                              valueOrDefault(currentUserDocument?.bills, 0.0) -
-                              valueOrDefault(
-                                  currentUserDocument?.totalExpenses, 0.0) -
-                              valueOrDefault(
-                                  currentUserDocument?.investmentAndGoals, 0.0),
-                        ));
-                        logFirebaseEvent('MonthlyCheck_update_app_state');
-                        FFAppState().monthlyIncome = double.parse(
-                            _model.monthlyCheckTextController.text);
-                        FFAppState().totalMonthlyIncome = valueOrDefault(
-                                currentUserDocument?.monthlyIncome, 0.0) +
-                            valueOrDefault(
-                                currentUserDocument?.additionalIncome, 0.0);
-                      },
-                    ),
-                    autofocus: false,
-                    textInputAction: TextInputAction.next,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      hintText: 'e.g. 5,000',
-                      hintStyle: FlutterFlowTheme.of(context)
-                          .bodyMedium
-                          .override(
+                                  currentUserDocument?.additionalIncome, 0.0);
+                        },
+                      ),
+                      autofocus: false,
+                      textInputAction: TextInputAction.next,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        hintText: 'e.g. 5,000',
+                        hintStyle: FlutterFlowTheme.of(context)
+                            .bodyMedium
+                            .override(
+                              font: GoogleFonts.roboto(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
+                            ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).alternate,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).primary,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        filled: true,
+                        fillColor:
+                            FlutterFlowTheme.of(context).primaryBackground,
+                        contentPadding: EdgeInsetsDirectional.fromSTEB(
+                            16.0, 14.0, 16.0, 14.0),
+                        prefixIcon: Icon(
+                          Icons.attach_money_rounded,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                          size: 18.0,
+                        ),
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
                             font: GoogleFonts.roboto(
                               fontWeight: FlutterFlowTheme.of(context)
                                   .bodyMedium
@@ -208,7 +269,7 @@ class _IncomeComponentWidgetState extends State<IncomeComponentWidget> {
                                   .bodyMedium
                                   .fontStyle,
                             ),
-                            color: FlutterFlowTheme.of(context).secondaryText,
+                            color: FlutterFlowTheme.of(context).primaryText,
                             letterSpacing: 0.0,
                             fontWeight: FlutterFlowTheme.of(context)
                                 .bodyMedium
@@ -217,64 +278,10 @@ class _IncomeComponentWidgetState extends State<IncomeComponentWidget> {
                                 .bodyMedium
                                 .fontStyle,
                           ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).alternate,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primary,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      filled: true,
-                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                      contentPadding: EdgeInsetsDirectional.fromSTEB(
-                          16.0, 14.0, 16.0, 14.0),
-                      prefixIcon: Icon(
-                        Icons.attach_money_rounded,
-                        color: FlutterFlowTheme.of(context).secondaryText,
-                        size: 18.0,
-                      ),
+                      keyboardType: TextInputType.number,
+                      validator: _model.monthlyCheckTextControllerValidator
+                          .asValidator(context),
                     ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          font: GoogleFonts.roboto(
-                            fontWeight: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .fontWeight,
-                            fontStyle: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .fontStyle,
-                          ),
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          letterSpacing: 0.0,
-                          fontWeight: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .fontWeight,
-                          fontStyle:
-                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                        ),
-                    keyboardType: TextInputType.number,
-                    validator: _model.monthlyCheckTextControllerValidator
-                        .asValidator(context),
                   ),
                   Text(
                     'Additional Income',
@@ -297,60 +304,121 @@ class _IncomeComponentWidgetState extends State<IncomeComponentWidget> {
                               .fontStyle,
                         ),
                   ),
-                  TextFormField(
-                    controller: _model.additionalIncomeTextController,
-                    focusNode: _model.additionalIncomeFocusNode,
-                    onChanged: (_) => EasyDebounce.debounce(
-                      '_model.additionalIncomeTextController',
-                      Duration(milliseconds: 2000),
-                      () async {
-                        logFirebaseEvent(
-                            'INCOME_COMPONENT_additionalIncome_ON_TEX');
-                        logFirebaseEvent('additionalIncome_backend_call');
+                  Semantics(
+                    label: 'additionalIncome',
+                    child: TextFormField(
+                      controller: _model.additionalIncomeTextController,
+                      focusNode: _model.additionalIncomeFocusNode,
+                      onChanged: (_) => EasyDebounce.debounce(
+                        '_model.additionalIncomeTextController',
+                        Duration(milliseconds: 2000),
+                        () async {
+                          logFirebaseEvent(
+                              'INCOME_COMPONENT_additionalIncome_ON_TEX');
+                          logFirebaseEvent('additionalIncome_backend_call');
 
-                        await currentUserReference!
-                            .update(createUsersRecordData(
-                          additionalIncome: double.tryParse(
-                              _model.additionalIncomeTextController.text),
-                        ));
-                        logFirebaseEvent('additionalIncome_backend_call');
+                          await currentUserReference!
+                              .update(createUsersRecordData(
+                            additionalIncome: double.tryParse(
+                                _model.additionalIncomeTextController.text),
+                          ));
+                          logFirebaseEvent('additionalIncome_backend_call');
 
-                        await currentUserReference!
-                            .update(createUsersRecordData(
-                          totalncome: valueOrDefault(
+                          await currentUserReference!
+                              .update(createUsersRecordData(
+                            totalncome: valueOrDefault(
+                                    currentUserDocument?.monthlyIncome, 0.0) +
+                                valueOrDefault(
+                                    currentUserDocument?.additionalIncome, 0.0),
+                          ));
+                          logFirebaseEvent('additionalIncome_backend_call');
+
+                          await currentUserReference!
+                              .update(createUsersRecordData(
+                            availableSpendings: valueOrDefault(
+                                    currentUserDocument?.totalncome, 0.0) -
+                                valueOrDefault(
+                                    currentUserDocument?.bills, 0.0) -
+                                valueOrDefault(
+                                    currentUserDocument?.totalExpenses, 0.0) -
+                                valueOrDefault(
+                                    currentUserDocument?.investmentAndGoals,
+                                    0.0),
+                          ));
+                          logFirebaseEvent('additionalIncome_update_app_state');
+                          FFAppState().additionaMonthlylncome = double.parse(
+                              _model.additionalIncomeTextController.text);
+                          FFAppState().totalMonthlyIncome = valueOrDefault(
                                   currentUserDocument?.monthlyIncome, 0.0) +
                               valueOrDefault(
-                                  currentUserDocument?.additionalIncome, 0.0),
-                        ));
-                        logFirebaseEvent('additionalIncome_backend_call');
-
-                        await currentUserReference!
-                            .update(createUsersRecordData(
-                          availableSpendings: valueOrDefault(
-                                  currentUserDocument?.totalncome, 0.0) -
-                              valueOrDefault(currentUserDocument?.bills, 0.0) -
-                              valueOrDefault(
-                                  currentUserDocument?.totalExpenses, 0.0) -
-                              valueOrDefault(
-                                  currentUserDocument?.investmentAndGoals, 0.0),
-                        ));
-                        logFirebaseEvent('additionalIncome_update_app_state');
-                        FFAppState().additionaMonthlylncome = double.parse(
-                            _model.additionalIncomeTextController.text);
-                        FFAppState().totalMonthlyIncome = valueOrDefault(
-                                currentUserDocument?.monthlyIncome, 0.0) +
-                            valueOrDefault(
-                                currentUserDocument?.additionalIncome, 0.0);
-                      },
-                    ),
-                    autofocus: false,
-                    textInputAction: TextInputAction.next,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      hintText: 'e.g. 1,200',
-                      hintStyle: FlutterFlowTheme.of(context)
-                          .bodyMedium
-                          .override(
+                                  currentUserDocument?.additionalIncome, 0.0);
+                        },
+                      ),
+                      autofocus: false,
+                      textInputAction: TextInputAction.next,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        hintText: 'e.g. 1,200',
+                        hintStyle: FlutterFlowTheme.of(context)
+                            .bodyMedium
+                            .override(
+                              font: GoogleFonts.roboto(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
+                            ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).alternate,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).primary,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        filled: true,
+                        fillColor:
+                            FlutterFlowTheme.of(context).primaryBackground,
+                        contentPadding: EdgeInsetsDirectional.fromSTEB(
+                            16.0, 14.0, 16.0, 14.0),
+                        prefixIcon: Icon(
+                          Icons.attach_money_rounded,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                          size: 18.0,
+                        ),
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
                             font: GoogleFonts.roboto(
                               fontWeight: FlutterFlowTheme.of(context)
                                   .bodyMedium
@@ -359,7 +427,7 @@ class _IncomeComponentWidgetState extends State<IncomeComponentWidget> {
                                   .bodyMedium
                                   .fontStyle,
                             ),
-                            color: FlutterFlowTheme.of(context).secondaryText,
+                            color: FlutterFlowTheme.of(context).primaryText,
                             letterSpacing: 0.0,
                             fontWeight: FlutterFlowTheme.of(context)
                                 .bodyMedium
@@ -368,129 +436,82 @@ class _IncomeComponentWidgetState extends State<IncomeComponentWidget> {
                                 .bodyMedium
                                 .fontStyle,
                           ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).alternate,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primary,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      filled: true,
-                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                      contentPadding: EdgeInsetsDirectional.fromSTEB(
-                          16.0, 14.0, 16.0, 14.0),
-                      prefixIcon: Icon(
-                        Icons.attach_money_rounded,
-                        color: FlutterFlowTheme.of(context).secondaryText,
-                        size: 18.0,
-                      ),
+                      keyboardType: TextInputType.number,
+                      validator: _model.additionalIncomeTextControllerValidator
+                          .asValidator(context),
                     ),
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          font: GoogleFonts.roboto(
-                            fontWeight: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .fontWeight,
-                            fontStyle: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .fontStyle,
-                          ),
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          letterSpacing: 0.0,
-                          fontWeight: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .fontWeight,
-                          fontStyle:
-                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                        ),
-                    keyboardType: TextInputType.number,
-                    validator: _model.additionalIncomeTextControllerValidator
-                        .asValidator(context),
                   ),
                 ].divide(SizedBox(height: 12.0)),
               ),
               Align(
                 alignment: AlignmentDirectional(0.0, 0.0),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    logFirebaseEvent('INCOME_COMPONENT_updateIncomeCom_ON_TAP');
-                    logFirebaseEvent('updateIncomeCom_google_analytics_event');
-                    logFirebaseEvent(
-                      'dashboard_Update',
-                      parameters: {
-                        'Param 11': 'dashboard_income',
-                      },
-                    );
-                    logFirebaseEvent('updateIncomeCom_update_app_state');
-                    FFAppState().availableSpending =
-                        valueOrDefault(currentUserDocument?.totalncome, 0.0) -
-                            valueOrDefault(currentUserDocument?.bills, 0.0) -
-                            valueOrDefault(
-                                currentUserDocument?.totalExpenses, 0.0) -
-                            valueOrDefault(
-                                currentUserDocument?.investmentAndGoals, 0.0);
-                    FFAppState().update(() {});
-                    logFirebaseEvent('updateIncomeCom_backend_call');
-
-                    await currentUserReference!.update(createUsersRecordData(
-                      availableSpendings:
+                child: Semantics(
+                  label: 'updateIncomeCom',
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      logFirebaseEvent(
+                          'INCOME_COMPONENT_updateIncomeCom_ON_TAP');
+                      logFirebaseEvent(
+                          'updateIncomeCom_google_analytics_event');
+                      logFirebaseEvent(
+                        'dashboard_Update',
+                        parameters: {
+                          'Param 11': 'dashboard_income',
+                        },
+                      );
+                      logFirebaseEvent('updateIncomeCom_update_app_state');
+                      FFAppState().availableSpending =
                           valueOrDefault(currentUserDocument?.totalncome, 0.0) -
                               valueOrDefault(currentUserDocument?.bills, 0.0) -
                               valueOrDefault(
                                   currentUserDocument?.totalExpenses, 0.0) -
                               valueOrDefault(
-                                  currentUserDocument?.investmentAndGoals, 0.0),
-                    ));
-                    logFirebaseEvent('updateIncomeCom_bottom_sheet');
-                    Navigator.pop(context);
-                  },
-                  text: 'Save',
-                  options: FFButtonOptions(
-                    height: 40.0,
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          font: GoogleFonts.roboto(
-                            fontWeight: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .fontWeight,
-                            fontStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .fontStyle,
-                          ),
-                          color: Colors.white,
-                          letterSpacing: 0.0,
-                          fontWeight: FlutterFlowTheme.of(context)
-                              .titleSmall
-                              .fontWeight,
-                          fontStyle:
-                              FlutterFlowTheme.of(context).titleSmall.fontStyle,
-                        ),
-                    elevation: 0.0,
-                    borderRadius: BorderRadius.circular(24.0),
+                                  currentUserDocument?.investmentAndGoals, 0.0);
+                      FFAppState().update(() {});
+                      logFirebaseEvent('updateIncomeCom_backend_call');
+
+                      await currentUserReference!.update(createUsersRecordData(
+                        availableSpendings: valueOrDefault(
+                                currentUserDocument?.totalncome, 0.0) -
+                            valueOrDefault(currentUserDocument?.bills, 0.0) -
+                            valueOrDefault(
+                                currentUserDocument?.totalExpenses, 0.0) -
+                            valueOrDefault(
+                                currentUserDocument?.investmentAndGoals, 0.0),
+                      ));
+                      logFirebaseEvent('updateIncomeCom_bottom_sheet');
+                      Navigator.pop(context);
+                    },
+                    text: 'Save',
+                    options: FFButtonOptions(
+                      height: 40.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                font: GoogleFonts.roboto(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .fontStyle,
+                                ),
+                                color: Colors.white,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .fontStyle,
+                              ),
+                      elevation: 0.0,
+                      borderRadius: BorderRadius.circular(24.0),
+                    ),
                   ),
                 ),
               ),
