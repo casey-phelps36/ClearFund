@@ -1,4 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/ai_agents/ai_agent.dart';
+import '/components/expense_submission_widget.dart';
 import '/custom_components/nav_bar/nav_bar_widget.dart';
 import '/dashboard_components/income_component/income_component_widget.dart';
 import '/dashboard_components/monthly_costs_component/monthly_costs_component_widget.dart';
@@ -6,6 +8,7 @@ import '/dashboard_components/savings_component/savings_component_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -266,6 +269,49 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                   ),
                 ),
               ),
+              FFButtonWidget(
+                onPressed: () async {
+                  logFirebaseEvent('DASHBOARDV3_FinancialAssistance_ON_TAP');
+                  logFirebaseEvent('FinancialAssistance_a_i_agent');
+                  await callAiAgent(
+                    context: context,
+                    prompt: 'How can I help?',
+                    threadId: currentUserUid,
+                    agentCloudFunctionName: 'clearFundAI',
+                    provider: 'GOOGLE',
+                    agentJson:
+                        '{\"status\":\"LIVE\",\"identifier\":{\"name\":\"clearFundAI\",\"key\":\"eu0or\"},\"name\":\"ClearFund AI\",\"description\":\"This AI is used to help ClearFund users make informed financial decisions by analyzing their income, expenses, savings habits, goals, and spending behavior. It should provide practical recommendations for saving money, budgeting, investing appropriate amounts, and improving overall financial health in a clear and supportive way.\",\"aiModel\":{\"provider\":\"GOOGLE\",\"model\":\"gemini-2.5-pro\",\"parameters\":{\"temperature\":{\"inputValue\":0.5},\"maxTokens\":{\"inputValue\":1000},\"topP\":{\"inputValue\":0.8}},\"messages\":[{\"role\":\"SYSTEM\",\"text\":\"You are ClearFund’s AI financial assistant. Your role is to help users make smarter personal finance decisions based on the information they provide, such as income, expenses, debt, savings, goals, and spending habits.\\n\\nYour responsibilities:\\n- Help users budget more effectively\\n- Suggest practical ways to save money\\n- Recommend reasonable amounts to save or invest based on the user’s situation\\n- Identify wasteful spending patterns and opportunities to improve financial health\\n- Explain financial ideas in simple, easy-to-understand language\\n- Give step-by-step guidance when helpful\\n\\nRules:\\n- Be supportive, practical, and clear\\n- Personalize advice to the user’s financial situation\\n- Ask for missing financial details when needed before making strong recommendations\\n- Do not pretend to know information the user has not provided\\n- Do not guarantee financial outcomes or promise investment returns\\n- Do not give reckless, overly aggressive, or unrealistic advice\\n- Frame investment guidance as general educational support, not professional financial advice\\n- Prioritize emergency savings, debt awareness, affordability, and risk tolerance before suggesting investing\\n- Keep answers concise, structured, and actionable\\n\\nWhen helping users:\\n1. Understand their current financial situation\\n2. Identify their main goal, such as saving money, paying off debt, or investing\\n3. Recommend the safest and most reasonable next steps\\n4. Explain why the recommendation makes sense\\n5. When possible, provide numbers, categories, or example allocations\"}]},\"requestOptions\":{\"requestTypes\":[\"PLAINTEXT\"]},\"responseOptions\":{\"responseType\":\"PLAINTEXT\"}}',
+                    responseType: 'PLAINTEXT',
+                  ).then((generatedText) {
+                    safeSetState(() => {});
+                  });
+                },
+                text: 'Financial Assistant',
+                options: FFButtonOptions(
+                  height: 40.0,
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  iconPadding:
+                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  color: Color(0xD3066395),
+                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                        font: GoogleFonts.roboto(
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                        ),
+                        color: Colors.white,
+                        letterSpacing: 0.0,
+                        fontWeight:
+                            FlutterFlowTheme.of(context).titleSmall.fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                      ),
+                  elevation: 0.0,
+                  borderRadius: BorderRadius.circular(18.0),
+                ),
+              ),
               Expanded(
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(28.0, 0.0, 28.0, 0.0),
@@ -455,56 +501,97 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     18.0, 18.0, 18.0, 18.0),
-                                child: Container(
-                                  width: MediaQuery.sizeOf(context).width * 0.5,
-                                  constraints: BoxConstraints(
-                                    maxWidth: 250.0,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 12.0,
-                                        color: Color(0x1A4A90D9),
-                                        offset: Offset(
-                                          0.0,
-                                          4.0,
-                                        ),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(16.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          width: 36.0,
-                                          height: 36.0,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xFFE8F4FD),
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'DASHBOARDV3_Container_tluakpkj_ON_TAP');
+                                    logFirebaseEvent('Container_bottom_sheet');
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      enableDrag: false,
+                                      context: context,
+                                      builder: (context) {
+                                        return GestureDetector(
+                                          onTap: () {
+                                            FocusScope.of(context).unfocus();
+                                            FocusManager.instance.primaryFocus
+                                                ?.unfocus();
+                                          },
+                                          child: Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: ExpenseSubmissionWidget(),
                                           ),
-                                          child: Align(
-                                            alignment:
-                                                AlignmentDirectional(0.0, 0.0),
-                                            child: Icon(
-                                              Icons.trending_down_rounded,
-                                              color: Color(0xFF4A90D9),
-                                              size: 20.0,
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
+                                  },
+                                  child: Container(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 0.5,
+                                    constraints: BoxConstraints(
+                                      maxWidth: 250.0,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          blurRadius: 12.0,
+                                          color: Color(0x1A4A90D9),
+                                          offset: Offset(
+                                            0.0,
+                                            4.0,
+                                          ),
+                                        )
+                                      ],
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(16.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            width: 36.0,
+                                            height: 36.0,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xFFE8F4FD),
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                            ),
+                                            child: Align(
+                                              alignment: AlignmentDirectional(
+                                                  0.0, 0.0),
+                                              child: Icon(
+                                                Icons.trending_down_rounded,
+                                                color: Color(0xFF4A90D9),
+                                                size: 20.0,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        Text(
-                                          'Already Spent',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodySmall
-                                              .override(
-                                                font: GoogleFonts.roboto(
+                                          Text(
+                                            'Already Spent',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodySmall
+                                                .override(
+                                                  font: GoogleFonts.roboto(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodySmall
+                                                            .fontStyle,
+                                                  ),
+                                                  color: Color(0xFF8BAFC8),
+                                                  fontSize: 12.0,
+                                                  letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w500,
                                                   fontStyle:
                                                       FlutterFlowTheme.of(
@@ -512,32 +599,35 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                                           .bodySmall
                                                           .fontStyle,
                                                 ),
-                                                color: Color(0xFF8BAFC8),
-                                                fontSize: 12.0,
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.w500,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodySmall
-                                                        .fontStyle,
+                                          ),
+                                          AuthUserStreamWidget(
+                                            builder: (context) => Text(
+                                              formatNumber(
+                                                valueOrDefault(
+                                                    currentUserDocument
+                                                        ?.totalExpenses,
+                                                    0.0),
+                                                formatType: FormatType.decimal,
+                                                decimalType:
+                                                    DecimalType.automatic,
+                                                currency: '',
                                               ),
-                                        ),
-                                        AuthUserStreamWidget(
-                                          builder: (context) => Text(
-                                            formatNumber(
-                                              valueOrDefault(
-                                                  currentUserDocument
-                                                      ?.totalExpenses,
-                                                  0.0),
-                                              formatType: FormatType.decimal,
-                                              decimalType:
-                                                  DecimalType.automatic,
-                                              currency: '',
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .headlineSmall
-                                                .override(
-                                                  font: GoogleFonts.roboto(
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .headlineSmall
+                                                  .override(
+                                                    font: GoogleFonts.roboto(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .headlineSmall
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Color(0xFF1A3D5C),
+                                                    fontSize: 22.0,
+                                                    letterSpacing: 0.0,
                                                     fontWeight: FontWeight.bold,
                                                     fontStyle:
                                                         FlutterFlowTheme.of(
@@ -545,35 +635,40 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                                             .headlineSmall
                                                             .fontStyle,
                                                   ),
-                                                  color: Color(0xFF1A3D5C),
-                                                  fontSize: 22.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .headlineSmall
-                                                          .fontStyle,
-                                                ),
+                                            ),
                                           ),
-                                        ),
-                                        AuthUserStreamWidget(
-                                          builder: (context) => Text(
-                                            '${formatNumber(
-                                              valueOrDefault(
-                                                      currentUserDocument
-                                                          ?.totalExpenses,
-                                                      0.0) /
-                                                  valueOrDefault(
-                                                      currentUserDocument
-                                                          ?.availableSpendings,
-                                                      0.0),
-                                              formatType: FormatType.percent,
-                                            )} of budget',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodySmall
-                                                .override(
-                                                  font: GoogleFonts.roboto(
+                                          AuthUserStreamWidget(
+                                            builder: (context) => Text(
+                                              '${formatNumber(
+                                                valueOrDefault(
+                                                        currentUserDocument
+                                                            ?.totalExpenses,
+                                                        0.0) /
+                                                    valueOrDefault(
+                                                        currentUserDocument
+                                                            ?.availableSpendings,
+                                                        0.0),
+                                                formatType: FormatType.percent,
+                                              )} of budget',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodySmall
+                                                  .override(
+                                                    font: GoogleFonts.roboto(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodySmall
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodySmall
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Color(0xFF8BAFC8),
+                                                    fontSize: 11.0,
+                                                    letterSpacing: 0.0,
                                                     fontWeight:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -585,23 +680,10 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                                             .bodySmall
                                                             .fontStyle,
                                                   ),
-                                                  color: Color(0xFF8BAFC8),
-                                                  fontSize: 11.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodySmall
-                                                          .fontWeight,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodySmall
-                                                          .fontStyle,
-                                                ),
+                                            ),
                                           ),
-                                        ),
-                                      ].divide(SizedBox(height: 8.0)),
+                                        ].divide(SizedBox(height: 8.0)),
+                                      ),
                                     ),
                                   ),
                                 ),

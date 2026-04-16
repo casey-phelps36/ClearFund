@@ -191,6 +191,7 @@ class _ProfileCreationWidgetState extends State<ProfileCreationWidget> {
                       ),
                     ),
                     FlutterFlowIconButton(
+                      key: ValueKey('IconButton_g968'),
                       borderColor: FlutterFlowTheme.of(context).primaryText,
                       borderRadius: 20.0,
                       buttonSize: 37.0,
