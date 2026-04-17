@@ -129,6 +129,7 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
             child: Padding(
               padding: EdgeInsets.all(20.0),
               child: SingleChildScrollView(
+                key: ValueKey('Column_wetv'),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
