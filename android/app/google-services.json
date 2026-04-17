@@ -1,13 +1,32 @@
 {
   "project_info": {
-    "project_number": "107288991502",
-    "project_id": "clearfund-dev",
-    "storage_bucket": "clearfund-dev.firebasestorage.app"
+    "project_number": "60648383638",
+    "project_id": "clear-fund-1km59f",
+    "storage_bucket": "clear-fund-1km59f.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:107288991502:android:20f9d4c92bc16d061be95f",
+        "mobilesdk_app_id": "1:60648383638:android:ad78de7902c87529254eb7",
+        "android_client_info": {
+          "package_name": "com.mycompany.clearfund"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7bCzKlqCtp0Cyw0Tv1DKRS8u2ZexV-08"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:60648383638:android:c25c0f9b707320f4254eb7",
         "android_client_info": {
           "package_name": "com.uricsc305.clearfund"
         }
@@ -15,7 +34,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDfUX3VRrmTkyK6sb2TG1iEuZ3CYX5zSpY"
+          "current_key": "AIzaSyA7bCzKlqCtp0Cyw0Tv1DKRS8u2ZexV-08"
         }
       ],
       "services": {

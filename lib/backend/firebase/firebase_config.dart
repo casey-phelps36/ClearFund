@@ -5,13 +5,13 @@ Future initFirebase() async {
   if (kIsWeb) {
     await Firebase.initializeApp(
         options: FirebaseOptions(
-            apiKey: "AIzaSyCy8QJJgJ5qqJiALmuLZo_ukuE68-TpFa4",
-            authDomain: "clearfund-dev.firebaseapp.com",
-            projectId: "clearfund-dev",
-            storageBucket: "clearfund-dev.firebasestorage.app",
-            messagingSenderId: "107288991502",
-            appId: "1:107288991502:web:61d5a9875d0adf3a1be95f",
-            measurementId: "G-M3M5LCT6YJ"));
+            apiKey: "AIzaSyCtkoWxYRZbv8FvnhQkcD111POOUIZbNsM",
+            authDomain: "clear-fund-1km59f.firebaseapp.com",
+            projectId: "clear-fund-1km59f",
+            storageBucket: "clear-fund-1km59f.firebasestorage.app",
+            messagingSenderId: "60648383638",
+            appId: "1:60648383638:web:0b2e50844876e53f254eb7",
+            measurementId: "G-793G9HN2W1"));
   } else {
     await Firebase.initializeApp();
   }
