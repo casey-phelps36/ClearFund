@@ -1,6 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/ai_agents/ai_agent.dart';
 import '/components/expense_submission_widget.dart';
+import '/custom_components/ai_assistance_bottom_page/ai_assistance_bottom_page_widget.dart';
 import '/custom_components/nav_bar/nav_bar_widget.dart';
 import '/dashboard_components/income_component/income_component_widget.dart';
 import '/dashboard_components/monthly_costs_component/monthly_costs_component_widget.dart';
@@ -272,19 +272,25 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
               FFButtonWidget(
                 onPressed: () async {
                   logFirebaseEvent('DASHBOARDV3_FinancialAssistance_ON_TAP');
-                  logFirebaseEvent('FinancialAssistance_a_i_agent');
-                  await callAiAgent(
+                  logFirebaseEvent('FinancialAssistance_bottom_sheet');
+                  await showModalBottomSheet(
+                    isScrollControlled: true,
+                    backgroundColor: Color(0xFFC9CCD0),
+                    enableDrag: false,
                     context: context,
-                    prompt: 'How can I help?',
-                    threadId: currentUserUid,
-                    agentCloudFunctionName: 'clearFundAI',
-                    provider: 'GOOGLE',
-                    agentJson:
-                        '{\"status\":\"LIVE\",\"identifier\":{\"name\":\"clearFundAI\",\"key\":\"eu0or\"},\"name\":\"ClearFund AI\",\"description\":\"This AI is used to help ClearFund users make informed financial decisions by analyzing their income, expenses, savings habits, goals, and spending behavior. It should provide practical recommendations for saving money, budgeting, investing appropriate amounts, and improving overall financial health in a clear and supportive way.\",\"aiModel\":{\"provider\":\"GOOGLE\",\"model\":\"gemini-2.5-pro\",\"parameters\":{\"temperature\":{\"inputValue\":0.5},\"maxTokens\":{\"inputValue\":1000},\"topP\":{\"inputValue\":0.8}},\"messages\":[{\"role\":\"SYSTEM\",\"text\":\"You are ClearFund’s AI financial assistant. Your role is to help users make smarter personal finance decisions based on the information they provide, such as income, expenses, debt, savings, goals, and spending habits.\\n\\nYour responsibilities:\\n- Help users budget more effectively\\n- Suggest practical ways to save money\\n- Recommend reasonable amounts to save or invest based on the user’s situation\\n- Identify wasteful spending patterns and opportunities to improve financial health\\n- Explain financial ideas in simple, easy-to-understand language\\n- Give step-by-step guidance when helpful\\n\\nRules:\\n- Be supportive, practical, and clear\\n- Personalize advice to the user’s financial situation\\n- Ask for missing financial details when needed before making strong recommendations\\n- Do not pretend to know information the user has not provided\\n- Do not guarantee financial outcomes or promise investment returns\\n- Do not give reckless, overly aggressive, or unrealistic advice\\n- Frame investment guidance as general educational support, not professional financial advice\\n- Prioritize emergency savings, debt awareness, affordability, and risk tolerance before suggesting investing\\n- Keep answers concise, structured, and actionable\\n\\nWhen helping users:\\n1. Understand their current financial situation\\n2. Identify their main goal, such as saving money, paying off debt, or investing\\n3. Recommend the safest and most reasonable next steps\\n4. Explain why the recommendation makes sense\\n5. When possible, provide numbers, categories, or example allocations\"}]},\"requestOptions\":{\"requestTypes\":[\"PLAINTEXT\"]},\"responseOptions\":{\"responseType\":\"PLAINTEXT\"}}',
-                    responseType: 'PLAINTEXT',
-                  ).then((generatedText) {
-                    safeSetState(() => {});
-                  });
+                    builder: (context) {
+                      return GestureDetector(
+                        onTap: () {
+                          FocusScope.of(context).unfocus();
+                          FocusManager.instance.primaryFocus?.unfocus();
+                        },
+                        child: Padding(
+                          padding: MediaQuery.viewInsetsOf(context),
+                          child: AiAssistanceBottomPageWidget(),
+                        ),
+                      );
+                    },
+                  ).then((value) => safeSetState(() {}));
                 },
                 text: 'Financial Assistant',
                 options: FFButtonOptions(
