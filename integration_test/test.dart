@@ -212,6 +212,7 @@ void main() async {
       ));
       await GoogleFonts.pendingFonts();
 
+      await tester.tap(find.byKey(const ValueKey('SignupTab_fhcw')));
       await tester.enterText(find.byKey(const ValueKey('Signup-Email_sare')),
           'casey.phelps@uri.edu');
       await tester.enterText(
@@ -238,6 +239,7 @@ void main() async {
       ));
       await GoogleFonts.pendingFonts();
 
+      await tester.tap(find.byKey(const ValueKey('SignupTab_fhcw')));
       await tester.enterText(find.byKey(const ValueKey('Signup-Email_sare')),
           'casey.phelps@uri.edu');
       await tester.enterText(
@@ -264,6 +266,7 @@ void main() async {
       ));
       await GoogleFonts.pendingFonts();
 
+      await tester.tap(find.byKey(const ValueKey('SignupTab_fhcw')));
       await tester.enterText(find.byKey(const ValueKey('Signup-Email_sare')),
           'phelpscasey8@gmail.com');
       await tester.enterText(
@@ -289,6 +292,7 @@ void main() async {
       ));
       await GoogleFonts.pendingFonts();
 
+      await tester.tap(find.byKey(const ValueKey('SignupTab_fhcw')));
       await tester.enterText(
           find.byKey(const ValueKey('Signup-Email_sare')), 'casey.phelps');
       await tester.pumpAndSettle(

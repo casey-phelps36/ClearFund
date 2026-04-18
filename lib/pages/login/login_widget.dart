@@ -161,6 +161,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                   indicatorColor: Colors.transparent,
                                   tabs: [
                                     Tab(
+                                      key: ValueKey('SignupTab_fhcw'),
                                       text: 'Signup\n',
                                     ),
                                     Tab(
