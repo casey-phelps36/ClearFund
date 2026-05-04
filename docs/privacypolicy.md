@@ -58,28 +58,38 @@ However, no method of transmission over the Internet is 100% secure.
 
 ---
 
+## 5. Data Retention
 
-## 5. User Rights
+We retain your data:
+- As long as your account is active
+- Until you request deletion
+
+---
+
+## 6. Data Deletion and User Rights
 
 You have the right to:
 - Access your data
 - Update or correct your data
+- Request deletion of your account and associated data
+
+To request deletion, fill out the form below.
+https://docs.google.com/forms/d/e/1FAIpQLSeK9fT2dNkjXgdSP7P5OTcI_5NU0Xf2cwx_2k_1OajPPip63A/viewform?usp=publish-editor
 
 ---
 
-## 6. Children's Privacy
+## 7. Children's Privacy
 
-ClearFund is not intended for users under the age of 18. We do not knowingly collect data from children.
+ClearFund is not intended for users under the age of 13. We do not knowingly collect data from children.
 
 ---
 
-## 7. Changes to This Privacy Policy
+## 8. Changes to This Privacy Policy
 
 We may update this Privacy Policy from time to time. Changes will be posted within the app and/or on our website with an updated effective date.
 
 ---
 
-
-## 8. Compliance with Google Play Requirements
+## 9. Compliance with Google Play Requirements
 
 This Privacy Policy is provided in accordance with Google Play Developer policies and discloses how ClearFund collects, uses, and shares user data.
