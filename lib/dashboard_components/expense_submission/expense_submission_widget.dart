@@ -1,8 +1,11 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'expense_submission_model.dart';
@@ -35,11 +38,11 @@ class _ExpenseSubmissionWidgetState extends State<ExpenseSubmissionWidget> {
     super.initState();
     _model = createModel(context, () => ExpenseSubmissionModel());
 
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode1 ??= FocusNode();
+    _model.expenseInputTextController ??= TextEditingController();
+    _model.expenseInputFocusNode ??= FocusNode();
 
     _model.textController2 ??= TextEditingController();
-    _model.textFieldFocusNode2 ??= FocusNode();
+    _model.textFieldFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -54,6 +57,10 @@ class _ExpenseSubmissionWidgetState extends State<ExpenseSubmissionWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints: BoxConstraints(
+        minHeight: 500.0,
+        maxWidth: 350.0,
+      ),
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
         borderRadius: BorderRadius.circular(24.0),
@@ -149,13 +156,12 @@ class _ExpenseSubmissionWidgetState extends State<ExpenseSubmissionWidget> {
                         ),
                         Expanded(
                           child: TextFormField(
-                            controller: _model.textController1,
-                            focusNode: _model.textFieldFocusNode1,
+                            controller: _model.expenseInputTextController,
+                            focusNode: _model.expenseInputFocusNode,
                             autofocus: false,
                             textInputAction: TextInputAction.done,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelText: '0.00',
                               labelStyle: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -175,6 +181,7 @@ class _ExpenseSubmissionWidgetState extends State<ExpenseSubmissionWidget> {
                                         .bodyMedium
                                         .fontStyle,
                                   ),
+                              hintText: '0.00',
                               hintStyle: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -238,6 +245,8 @@ class _ExpenseSubmissionWidgetState extends State<ExpenseSubmissionWidget> {
                                         .titleMedium
                                         .fontStyle,
                                   ),
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
                                   letterSpacing: 0.0,
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .titleMedium
@@ -246,8 +255,10 @@ class _ExpenseSubmissionWidgetState extends State<ExpenseSubmissionWidget> {
                                       .titleMedium
                                       .fontStyle,
                                 ),
-                            keyboardType: TextInputType.number,
-                            validator: _model.textController1Validator
+                            keyboardType: const TextInputType.numberWithOptions(
+                                decimal: true),
+                            validator: _model
+                                .expenseInputTextControllerValidator
                                 .asValidator(context),
                           ),
                         ),
@@ -259,12 +270,11 @@ class _ExpenseSubmissionWidgetState extends State<ExpenseSubmissionWidget> {
                         Expanded(
                           child: TextFormField(
                             controller: _model.textController2,
-                            focusNode: _model.textFieldFocusNode2,
+                            focusNode: _model.textFieldFocusNode,
                             autofocus: false,
                             textInputAction: TextInputAction.done,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelText: 'Description (optional)',
                               labelStyle: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -284,6 +294,7 @@ class _ExpenseSubmissionWidgetState extends State<ExpenseSubmissionWidget> {
                                         .bodyMedium
                                         .fontStyle,
                                   ),
+                              hintText: 'Description (optional)',
                               hintStyle: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -347,6 +358,8 @@ class _ExpenseSubmissionWidgetState extends State<ExpenseSubmissionWidget> {
                                         .bodyMedium
                                         .fontStyle,
                                   ),
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
                                   letterSpacing: 0.0,
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -437,8 +450,27 @@ class _ExpenseSubmissionWidgetState extends State<ExpenseSubmissionWidget> {
                       ].divide(SizedBox(height: 8.0)),
                     ),
                     FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
+                      onPressed: () async {
+                        logFirebaseEvent(
+                            'EXPENSE_SUBMISSION_SAVE_ENTRY_BTN_ON_TAP');
+                        logFirebaseEvent('Button_backend_call');
+
+                        await currentUserReference!
+                            .update(createUsersRecordData(
+                          totalExpenses: valueOrDefault(
+                                  currentUserDocument?.totalExpenses, 0.0) +
+                              double.parse(
+                                  _model.expenseInputTextController.text),
+                          availableSpendings: valueOrDefault(
+                                  currentUserDocument?.totalncome, 0.0) -
+                              valueOrDefault(currentUserDocument?.bills, 0.0) -
+                              valueOrDefault(
+                                  currentUserDocument?.totalExpenses, 0.0) -
+                              valueOrDefault(
+                                  currentUserDocument?.investmentAndGoals, 0.0),
+                        ));
+                        logFirebaseEvent('Button_bottom_sheet');
+                        Navigator.pop(context);
                       },
                       text: 'Save Entry',
                       options: FFButtonOptions(
@@ -479,100 +511,118 @@ class _ExpenseSubmissionWidgetState extends State<ExpenseSubmissionWidget> {
                 ),
               ),
             ),
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Color(0xFFF0F7FF),
-                borderRadius: BorderRadius.circular(16.0),
-                border: Border.all(
-                  color: Color(0xFFB3D9F7),
-                  width: 1.0,
-                ),
-              ),
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
+            if (getRemoteConfigBool('dashboardUpdate'))
+              InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  logFirebaseEvent('EXPENSE_SUBMISSION_Container_yt0jgfas_ON');
+                  logFirebaseEvent('Container_navigate_to');
+
+                  context.pushNamed(ReceiptInputWidget.routeName);
+                },
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFF0F7FF),
+                    borderRadius: BorderRadius.circular(16.0),
+                    border: Border.all(
+                      color: Color(0xFFB3D9F7),
+                      width: 1.0,
+                    ),
+                  ),
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 20.0),
+                    child: Row(
                       mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          width: 44.0,
-                          height: 44.0,
-                          decoration: BoxDecoration(
-                            color: Color(0xFFD6EEFF),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          child: Icon(
-                            Icons.receipt_long,
-                            color: Color(0xFF1A6FA8),
-                            size: 22.0,
-                          ),
-                        ),
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
                           children: [
-                            Text(
-                              'Upload a Receipt',
-                              style: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    font: GoogleFonts.roboto(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontStyle,
-                                    ),
-                                    color: Color(0xFF1A6FA8),
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontStyle,
-                                  ),
+                            Container(
+                              width: 44.0,
+                              height: 44.0,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFD6EEFF),
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              child: Icon(
+                                Icons.receipt_long,
+                                color: Color(0xFF1A6FA8),
+                                size: 22.0,
+                              ),
                             ),
-                            Text(
-                              'Take a photo or submit a file.',
-                              style: FlutterFlowTheme.of(context)
-                                  .labelSmall
-                                  .override(
-                                    font: GoogleFonts.roboto(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .labelSmall
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .labelSmall
-                                          .fontStyle,
-                                    ),
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .labelSmall
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .labelSmall
-                                        .fontStyle,
-                                  ),
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Upload a Receipt',
+                                  style: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        font: GoogleFonts.roboto(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontStyle,
+                                        ),
+                                        color: Color(0xFF1A6FA8),
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
+                                      ),
+                                ),
+                                Text(
+                                  'Take a photo or submit a file.',
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelSmall
+                                      .override(
+                                        font: GoogleFonts.roboto(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelSmall
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelSmall
+                                                  .fontStyle,
+                                        ),
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .labelSmall
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .labelSmall
+                                            .fontStyle,
+                                      ),
+                                ),
+                              ].divide(SizedBox(height: 4.0)),
                             ),
-                          ].divide(SizedBox(height: 4.0)),
+                          ].divide(SizedBox(width: 14.0)),
                         ),
-                      ].divide(SizedBox(width: 14.0)),
+                        Icon(
+                          Icons.chevron_right,
+                          color: Color(0xFF1A6FA8),
+                          size: 24.0,
+                        ),
+                      ],
                     ),
-                    Icon(
-                      Icons.chevron_right,
-                      color: Color(0xFF1A6FA8),
-                      size: 24.0,
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
           ].divide(SizedBox(height: 20.0)),
         ),
       ),

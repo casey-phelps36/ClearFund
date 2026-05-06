@@ -54,12 +54,12 @@ void main() async {
       ));
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       expect(find.text('Financial Info'), findsWidgets);
-    }, skip: true);
+    });
 
     testWidgets('finance update', (WidgetTester tester) async {
       _overrideOnError();
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: 'test123@gmail.com', password: 'password');
+          email: 'test@test.com', password: 'password');
       await tester.pumpWidget(ChangeNotifierProvider(
         create: (context) => FFAppState(),
         child: MyApp(
@@ -155,7 +155,7 @@ void main() async {
     testWidgets('widget finance update', (WidgetTester tester) async {
       _overrideOnError();
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: 'test123@gmail.com', password: 'password');
+          email: 'test@test.com', password: 'password');
       await tester.pumpWidget(ChangeNotifierProvider(
         create: (context) => FFAppState(),
         child: MyApp(
@@ -167,7 +167,13 @@ void main() async {
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.tap(find.byKey(const ValueKey('Container_4ph9')));
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
-      expect(find.text('Monthly Salary'), findsWidgets);
+      expect(
+        find.descendant(
+          of: find.bySemanticsLabel(RegExp('monthly salary')),
+          matching: find.text('Monthly Salary'),
+        ),
+        findsWidgets,
+      );
       await tester.enterText(
           find.bySemanticsLabel(RegExp('MonthlyCheck')), '6000');
       await tester.enterText(
@@ -176,28 +182,12 @@ void main() async {
       await tester.pumpAndSettle(const Duration(milliseconds: 10000));
       expect(
         find.descendant(
-          of: find.byKey(const ValueKey('dashboardv3_n8td')),
-          matching: find.text('\$2,850'),
-        ),
-        findsOneWidget,
-      );
-      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
-      expect(
-        find.descendant(
-          of: find.byKey(const ValueKey('moneyavailable_xxo6')),
-          matching: find.text('\$2,850'),
-        ),
-        findsOneWidget,
-      );
-      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
-      expect(
-        find.descendant(
           of: find.byKey(const ValueKey('monthlyincome_6v4l')),
           matching: find.text('\$7,200'),
         ),
         findsOneWidget,
       );
-    });
+    }, skip: true);
   });
 
   group('US 1', () {

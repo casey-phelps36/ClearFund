@@ -125,10 +125,21 @@ class _IncomeComponentWidgetState extends State<IncomeComponentWidget> {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Monthly Salary',
-                    style: FlutterFlowTheme.of(context).labelMedium.override(
-                          font: GoogleFonts.roboto(
+                  Semantics(
+                    label: 'monthly salary',
+                    child: Text(
+                      'Monthly Salary',
+                      style: FlutterFlowTheme.of(context).labelMedium.override(
+                            font: GoogleFonts.roboto(
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .fontStyle,
+                            ),
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            letterSpacing: 0.0,
                             fontWeight: FlutterFlowTheme.of(context)
                                 .labelMedium
                                 .fontWeight,
@@ -136,15 +147,7 @@ class _IncomeComponentWidgetState extends State<IncomeComponentWidget> {
                                 .labelMedium
                                 .fontStyle,
                           ),
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          letterSpacing: 0.0,
-                          fontWeight: FlutterFlowTheme.of(context)
-                              .labelMedium
-                              .fontWeight,
-                          fontStyle: FlutterFlowTheme.of(context)
-                              .labelMedium
-                              .fontStyle,
-                        ),
+                    ),
                   ),
                   Semantics(
                     label: 'MonthlyCheck',
@@ -476,6 +479,11 @@ class _IncomeComponentWidgetState extends State<IncomeComponentWidget> {
                             valueOrDefault(currentUserDocument?.bills, 0.0) -
                             valueOrDefault(
                                 currentUserDocument?.totalExpenses, 0.0) -
+                            valueOrDefault(
+                                currentUserDocument?.investmentAndGoals, 0.0),
+                        maxBudget: valueOrDefault(
+                                currentUserDocument?.totalncome, 0.0) -
+                            valueOrDefault(currentUserDocument?.bills, 0.0) -
                             valueOrDefault(
                                 currentUserDocument?.investmentAndGoals, 0.0),
                       ));

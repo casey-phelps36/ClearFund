@@ -1,14 +1,16 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/components/expense_submission_widget.dart';
 import '/custom_components/ai_assistance_bottom_page/ai_assistance_bottom_page_widget.dart';
 import '/custom_components/nav_bar/nav_bar_widget.dart';
+import '/dashboard_components/expense_submission/expense_submission_widget.dart';
 import '/dashboard_components/income_component/income_component_widget.dart';
 import '/dashboard_components/monthly_costs_component/monthly_costs_component_widget.dart';
 import '/dashboard_components/savings_component/savings_component_widget.dart';
+import '/flutter_flow/flutter_flow_ad_banner.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -167,9 +169,10 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                   valueOrDefault(
                                       currentUserDocument?.investmentAndGoals,
                                       0.0),
-                              formatType: FormatType.decimal,
-                              decimalType: DecimalType.automatic,
+                              formatType: FormatType.custom,
                               currency: '',
+                              format: '#,##0.00',
+                              locale: '',
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .displayLarge
@@ -216,9 +219,10 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                             formatNumber(
                               valueOrDefault(
                                   currentUserDocument?.availableSpendings, 0.0),
-                              formatType: FormatType.decimal,
-                              decimalType: DecimalType.automatic,
+                              formatType: FormatType.custom,
                               currency: '',
+                              format: '#,##0.00',
+                              locale: '',
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .displayLarge
@@ -275,7 +279,8 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                   logFirebaseEvent('FinancialAssistance_bottom_sheet');
                   await showModalBottomSheet(
                     isScrollControlled: true,
-                    backgroundColor: Color(0xFFC9CCD0),
+                    backgroundColor:
+                        FlutterFlowTheme.of(context).primaryBackground,
                     enableDrag: false,
                     context: context,
                     builder: (context) {
@@ -286,7 +291,10 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                         },
                         child: Padding(
                           padding: MediaQuery.viewInsetsOf(context),
-                          child: AiAssistanceBottomPageWidget(),
+                          child: Container(
+                            height: MediaQuery.sizeOf(context).height * 1.0,
+                            child: AiAssistanceBottomPageWidget(),
+                          ),
                         ),
                       );
                     },
@@ -298,7 +306,7 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                   padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   iconPadding:
                       EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  color: Color(0xD3066395),
+                  color: Color(0xFF4A90D9),
                   textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                         font: GoogleFonts.roboto(
                           fontWeight: FlutterFlowTheme.of(context)
@@ -325,6 +333,13 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        FlutterFlowAdBanner(
+                          width: 350.0,
+                          height: 50.0,
+                          showsTestAd: true,
+                          androidAdUnitID:
+                              'ca-app-pub-7647763420151014/5996097165',
+                        ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 0.0, 20.0, 0.0),
@@ -455,11 +470,10 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                                       currentUserDocument
                                                           ?.totalncome,
                                                       0.0),
-                                                  formatType:
-                                                      FormatType.decimal,
-                                                  decimalType:
-                                                      DecimalType.automatic,
+                                                  formatType: FormatType.custom,
                                                   currency: '',
+                                                  format: '#,##0.00',
+                                                  locale: '',
                                                 ),
                                                 style: FlutterFlowTheme.of(
                                                         context)
@@ -531,7 +545,10 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                           child: Padding(
                                             padding: MediaQuery.viewInsetsOf(
                                                 context),
-                                            child: ExpenseSubmissionWidget(),
+                                            child: Container(
+                                              height: 600.0,
+                                              child: ExpenseSubmissionWidget(),
+                                            ),
                                           ),
                                         );
                                       },
@@ -613,10 +630,10 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                                     currentUserDocument
                                                         ?.totalExpenses,
                                                     0.0),
-                                                formatType: FormatType.decimal,
-                                                decimalType:
-                                                    DecimalType.automatic,
+                                                formatType: FormatType.custom,
                                                 currency: '',
+                                                format: '#,##0.00',
+                                                locale: '',
                                               ),
                                               style: FlutterFlowTheme.of(
                                                       context)
@@ -645,16 +662,20 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                           ),
                                           AuthUserStreamWidget(
                                             builder: (context) => Text(
-                                              '${formatNumber(
-                                                valueOrDefault(
-                                                        currentUserDocument
-                                                            ?.totalExpenses,
-                                                        0.0) /
-                                                    valueOrDefault(
-                                                        currentUserDocument
-                                                            ?.availableSpendings,
-                                                        0.0),
-                                                formatType: FormatType.percent,
+                                              '${valueOrDefault<String>(
+                                                formatNumber(
+                                                  valueOrDefault(
+                                                          currentUserDocument
+                                                              ?.totalExpenses,
+                                                          0.0) /
+                                                      valueOrDefault(
+                                                          currentUserDocument
+                                                              ?.maxBudget,
+                                                          0.0),
+                                                  formatType:
+                                                      FormatType.percent,
+                                                ),
+                                                '0',
                                               )} of budget',
                                               style: FlutterFlowTheme.of(
                                                       context)
@@ -811,10 +832,10 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                                 valueOrDefault(
                                                     currentUserDocument?.bills,
                                                     0.0),
-                                                formatType: FormatType.decimal,
-                                                decimalType:
-                                                    DecimalType.automatic,
+                                                formatType: FormatType.custom,
                                                 currency: '',
+                                                format: '#,##0.00',
+                                                locale: '',
                                               ),
                                               style: FlutterFlowTheme.of(
                                                       context)
@@ -870,6 +891,144 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                                       FlutterFlowTheme.of(
                                                               context)
                                                           .bodySmall
+                                                          .fontStyle,
+                                                ),
+                                          ),
+                                        ].divide(SizedBox(height: 8.0)),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    18.0, 18.0, 18.0, 18.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'DASHBOARDV3_Container_uq9262s2_ON_TAP');
+                                    if (getRemoteConfigBool(
+                                        'dashboardUpdate')) {
+                                      logFirebaseEvent(
+                                          'Container_bottom_sheet');
+                                      await showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        enableDrag: false,
+                                        context: context,
+                                        builder: (context) {
+                                          return GestureDetector(
+                                            onTap: () {
+                                              FocusScope.of(context).unfocus();
+                                              FocusManager.instance.primaryFocus
+                                                  ?.unfocus();
+                                            },
+                                            child: Padding(
+                                              padding: MediaQuery.viewInsetsOf(
+                                                  context),
+                                              child:
+                                                  MonthlyCostsComponentWidget(),
+                                            ),
+                                          );
+                                        },
+                                      ).then((value) => safeSetState(() {}));
+                                    } else {
+                                      return;
+                                    }
+                                  },
+                                  child: Container(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 0.5,
+                                    constraints: BoxConstraints(
+                                      maxWidth: 250.0,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          blurRadius: 12.0,
+                                          color: Color(0x1A4A90D9),
+                                          offset: Offset(
+                                            0.0,
+                                            4.0,
+                                          ),
+                                        )
+                                      ],
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(16.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            width: 36.0,
+                                            height: 36.0,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xFFE8F4FD),
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                            ),
+                                            child: Align(
+                                              alignment: AlignmentDirectional(
+                                                  0.0, 0.0),
+                                              child: InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'DASHBOARDV3_PAGE_Icon_gije1igl_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Icon_navigate_to');
+
+                                                  context.pushNamed(
+                                                      ReceiptInputWidget
+                                                          .routeName);
+                                                },
+                                                child: Icon(
+                                                  Icons.add_circle_outline,
+                                                  color: Color(0xFF4A90D9),
+                                                  size: 34.0,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Text(
+                                            'Upload Receipt',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  font: GoogleFonts.roboto(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
                                                           .fontStyle,
                                                 ),
                                           ),
@@ -1100,10 +1259,10 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                                   currentUserDocument
                                                       ?.currentSavings,
                                                   0.0),
-                                              formatType: FormatType.decimal,
-                                              decimalType:
-                                                  DecimalType.automatic,
+                                              formatType: FormatType.custom,
                                               currency: '',
+                                              format: '#,##0.00',
+                                              locale: '',
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .titleMedium
@@ -1241,10 +1400,9 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                                                   currentUserDocument
                                                       ?.currentInvestment,
                                                   0.0),
-                                              formatType: FormatType.decimal,
-                                              decimalType:
-                                                  DecimalType.automatic,
-                                              currency: '',
+                                              formatType: FormatType.custom,
+                                              format: '#,##0.00',
+                                              locale: '',
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .titleMedium

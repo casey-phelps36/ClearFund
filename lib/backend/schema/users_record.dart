@@ -35,11 +35,6 @@ class UsersRecord extends FirestoreRecord {
   DateTime? get createdTime => _createdTime;
   bool hasCreatedTime() => _createdTime != null;
 
-  // "budget_max" field.
-  int? _budgetMax;
-  int get budgetMax => _budgetMax ?? 0;
-  bool hasBudgetMax() => _budgetMax != null;
-
   // "photo_url" field.
   String? _photoUrl;
   String get photoUrl => _photoUrl ?? '';
@@ -180,12 +175,16 @@ class UsersRecord extends FirestoreRecord {
   double get bills => _bills ?? 0.0;
   bool hasBills() => _bills != null;
 
+  // "maxBudget" field.
+  double? _maxBudget;
+  double get maxBudget => _maxBudget ?? 0.0;
+  bool hasMaxBudget() => _maxBudget != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
     _uid = snapshotData['uid'] as String?;
     _createdTime = snapshotData['created_time'] as DateTime?;
-    _budgetMax = castToType<int>(snapshotData['budget_max']);
     _photoUrl = snapshotData['photo_url'] as String?;
     _phoneNumber = snapshotData['phone_number'] as String?;
     _monthlyIncome = castToType<double>(snapshotData['monthly_income']);
@@ -210,6 +209,7 @@ class UsersRecord extends FirestoreRecord {
         castToType<double>(snapshotData['availableSpendings']);
     _totalncome = castToType<double>(snapshotData['totalncome']);
     _bills = castToType<double>(snapshotData['bills']);
+    _maxBudget = castToType<double>(snapshotData['maxBudget']);
   }
 
   static CollectionReference get collection =>
@@ -250,7 +250,6 @@ Map<String, dynamic> createUsersRecordData({
   String? displayName,
   String? uid,
   DateTime? createdTime,
-  int? budgetMax,
   String? photoUrl,
   String? phoneNumber,
   double? monthlyIncome,
@@ -273,6 +272,7 @@ Map<String, dynamic> createUsersRecordData({
   double? availableSpendings,
   double? totalncome,
   double? bills,
+  double? maxBudget,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -280,7 +280,6 @@ Map<String, dynamic> createUsersRecordData({
       'display_name': displayName,
       'uid': uid,
       'created_time': createdTime,
-      'budget_max': budgetMax,
       'photo_url': photoUrl,
       'phone_number': phoneNumber,
       'monthly_income': monthlyIncome,
@@ -303,6 +302,7 @@ Map<String, dynamic> createUsersRecordData({
       'availableSpendings': availableSpendings,
       'totalncome': totalncome,
       'bills': bills,
+      'maxBudget': maxBudget,
     }.withoutNulls,
   );
 
@@ -318,7 +318,6 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.displayName == e2?.displayName &&
         e1?.uid == e2?.uid &&
         e1?.createdTime == e2?.createdTime &&
-        e1?.budgetMax == e2?.budgetMax &&
         e1?.photoUrl == e2?.photoUrl &&
         e1?.phoneNumber == e2?.phoneNumber &&
         e1?.monthlyIncome == e2?.monthlyIncome &&
@@ -340,7 +339,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.goalInput == e2?.goalInput &&
         e1?.availableSpendings == e2?.availableSpendings &&
         e1?.totalncome == e2?.totalncome &&
-        e1?.bills == e2?.bills;
+        e1?.bills == e2?.bills &&
+        e1?.maxBudget == e2?.maxBudget;
   }
 
   @override
@@ -349,7 +349,6 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.displayName,
         e?.uid,
         e?.createdTime,
-        e?.budgetMax,
         e?.photoUrl,
         e?.phoneNumber,
         e?.monthlyIncome,
@@ -371,7 +370,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.goalInput,
         e?.availableSpendings,
         e?.totalncome,
-        e?.bills
+        e?.bills,
+        e?.maxBudget
       ]);
 
   @override

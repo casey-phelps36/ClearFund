@@ -798,6 +798,11 @@ class _MonthlyCostsComponentWidgetState
                                   currentUserDocument?.totalExpenses, 0.0) -
                               valueOrDefault(
                                   currentUserDocument?.investmentAndGoals, 0.0),
+                      maxBudget:
+                          valueOrDefault(currentUserDocument?.totalncome, 0.0) -
+                              valueOrDefault(currentUserDocument?.bills, 0.0) -
+                              valueOrDefault(
+                                  currentUserDocument?.investmentAndGoals, 0.0),
                     ));
                     logFirebaseEvent('updateCostCom_bottom_sheet');
                     Navigator.pop(context);

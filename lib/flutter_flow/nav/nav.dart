@@ -98,9 +98,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           builder: (context, params) => ProfileCreationWidget(),
         ),
         FFRoute(
+          name: ProfileWidget.routeName,
+          path: ProfileWidget.routePath,
+          builder: (context, params) => ProfileWidget(),
+        ),
+        FFRoute(
           name: GoalsWidget.routeName,
           path: GoalsWidget.routePath,
           builder: (context, params) => GoalsWidget(),
+        ),
+        FFRoute(
+          name: FinanceInfoWidget.routeName,
+          path: FinanceInfoWidget.routePath,
+          builder: (context, params) => FinanceInfoWidget(),
         ),
         FFRoute(
           name: Dashboardv3Widget.routeName,
@@ -111,16 +121,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
               ParamType.bool,
             ),
           ),
-        ),
-        FFRoute(
-          name: ProfileWidget.routeName,
-          path: ProfileWidget.routePath,
-          builder: (context, params) => ProfileWidget(),
-        ),
-        FFRoute(
-          name: FinanceInfoWidget.routeName,
-          path: FinanceInfoWidget.routePath,
-          builder: (context, params) => FinanceInfoWidget(),
         ),
         FFRoute(
           name: ReceiptInputWidget.routeName,

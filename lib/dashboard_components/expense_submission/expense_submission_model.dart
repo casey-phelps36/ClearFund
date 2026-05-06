@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 class ExpenseSubmissionModel extends FlutterFlowModel<ExpenseSubmissionWidget> {
   ///  State fields for stateful widgets in this component.
 
+  // State field(s) for expenseInput widget.
+  FocusNode? expenseInputFocusNode;
+  TextEditingController? expenseInputTextController;
+  String? Function(BuildContext, String?)? expenseInputTextControllerValidator;
   // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode1;
-  TextEditingController? textController1;
-  String? Function(BuildContext, String?)? textController1Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode2;
+  FocusNode? textFieldFocusNode;
   TextEditingController? textController2;
   String? Function(BuildContext, String?)? textController2Validator;
   // State field(s) for ChoiceChips widget.
@@ -26,10 +26,10 @@ class ExpenseSubmissionModel extends FlutterFlowModel<ExpenseSubmissionWidget> {
 
   @override
   void dispose() {
-    textFieldFocusNode1?.dispose();
-    textController1?.dispose();
+    expenseInputFocusNode?.dispose();
+    expenseInputTextController?.dispose();
 
-    textFieldFocusNode2?.dispose();
+    textFieldFocusNode?.dispose();
     textController2?.dispose();
   }
 }

@@ -100,8 +100,9 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
             ),
             onPressed: () async {
               logFirebaseEvent('FINANCE_INFO_arrow_back_rounded_ICN_ON_T');
-              logFirebaseEvent('IconButton_navigate_back');
-              context.safePop();
+              logFirebaseEvent('IconButton_navigate_to');
+
+              context.goNamed(Dashboardv3Widget.routeName);
             },
           ),
           title: Text(
@@ -372,7 +373,9 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                    keyboardType: TextInputType.number,
+                                    keyboardType:
+                                        const TextInputType.numberWithOptions(
+                                            decimal: true),
                                     validator: _model
                                         .monthlyCheckTextControllerValidator
                                         .asValidator(context),
@@ -547,7 +550,9 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                    keyboardType: TextInputType.number,
+                                    keyboardType:
+                                        const TextInputType.numberWithOptions(
+                                            decimal: true),
                                     validator: _model
                                         .additionalIncomeTextControllerValidator
                                         .asValidator(context),
@@ -793,7 +798,9 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                    keyboardType: TextInputType.number,
+                                    keyboardType:
+                                        const TextInputType.numberWithOptions(
+                                            decimal: true),
                                     validator: _model
                                         .rentTextControllerValidator
                                         .asValidator(context),
@@ -964,7 +971,9 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                    keyboardType: TextInputType.number,
+                                    keyboardType:
+                                        const TextInputType.numberWithOptions(
+                                            decimal: true),
                                     validator: _model
                                         .utilitiesTextControllerValidator
                                         .asValidator(context),
@@ -1136,7 +1145,9 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                    keyboardType: TextInputType.number,
+                                    keyboardType:
+                                        const TextInputType.numberWithOptions(
+                                            decimal: true),
                                     validator: _model
                                         .foodGroceriesTextControllerValidator
                                         .asValidator(context),
@@ -1309,7 +1320,9 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                    keyboardType: TextInputType.number,
+                                    keyboardType:
+                                        const TextInputType.numberWithOptions(
+                                            decimal: true),
                                     validator: _model
                                         .transportationTextControllerValidator
                                         .asValidator(context),
@@ -1550,7 +1563,9 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                    keyboardType: TextInputType.number,
+                                    keyboardType:
+                                        const TextInputType.numberWithOptions(
+                                            decimal: true),
                                     validator: _model
                                         .monthlySavingsTextControllerValidator
                                         .asValidator(context),
@@ -1714,7 +1729,9 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                    keyboardType: TextInputType.number,
+                                    keyboardType:
+                                        const TextInputType.numberWithOptions(
+                                            decimal: true),
                                     validator: _model
                                         .investmentsTextControllerValidator
                                         .asValidator(context),
@@ -1950,7 +1967,9 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                    keyboardType: TextInputType.number,
+                                    keyboardType:
+                                        const TextInputType.numberWithOptions(
+                                            decimal: true),
                                     validator: _model
                                         .totalDebtTextControllerValidator
                                         .asValidator(context),
@@ -2121,7 +2140,9 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                                                   .bodyMedium
                                                   .fontStyle,
                                         ),
-                                    keyboardType: TextInputType.number,
+                                    keyboardType:
+                                        const TextInputType.numberWithOptions(
+                                            decimal: true),
                                     validator: _model
                                         .monthlyDebtTextControllerValidator
                                         .asValidator(context),
@@ -2199,6 +2220,9 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                           totalncome: FFAppState().totalMonthlyIncome,
                           bills: _model.totalmonthlyExpenses,
                           investmentAndGoals: _model.totalSavings,
+                          maxBudget: (_model.totalMonthlyIncome!) -
+                              (_model.totalmonthlyExpenses!) -
+                              (_model.totalSavings!),
                         ));
                         logFirebaseEvent('Button_navigate_to');
 

@@ -1,5 +1,6 @@
 import '/custom_components/nav_bar/nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'dashboardv3_widget.dart' show Dashboardv3Widget;
 import 'package:flutter/material.dart';
 

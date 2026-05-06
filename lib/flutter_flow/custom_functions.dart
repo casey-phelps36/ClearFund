@@ -46,3 +46,34 @@ double overallProgressBar(
   double progress = totalCurrent / totalGoal;
   return progress.clamp(0.01, 1.0);
 }
+
+dynamic jsonToDataReceipt(String? jsonString) {
+  if (jsonString == null || jsonString.isEmpty) {
+    return null;
+  }
+
+  try {
+    // 1. Clean the string of any Markdown backticks
+    final cleanString =
+        jsonString.replaceAll('```json', '').replaceAll('```', '').trim();
+
+    // 2. Parse the string into a Map
+    Map<String, dynamic> data = jsonDecode(cleanString);
+
+    // 3. Normalize 'amount' (looks for amount, total_amount, or total)
+    var amountValue =
+        data['amount'] ?? data['total_amount'] ?? data['total'] ?? 0.0;
+    data['amount'] = double.tryParse(amountValue.toString()) ?? 0.0;
+
+    // 4. Normalize 'vendor' (looks for vendor or store)
+    data['vendor'] = (data['vendor'] ?? data['store'] ?? 'Unknown').toString();
+
+    // 5. Normalize 'category'
+    data['category'] = (data['category'] ?? 'General').toString();
+
+    return data;
+  } catch (e) {
+    // If it fails, we return a map with "Unknown" so the DB doesn't get a literal null
+    return {'vendor': 'Error Parsing', 'amount': 0.0, 'category': 'Error'};
+  }
+}
