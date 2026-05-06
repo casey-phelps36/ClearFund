@@ -130,7 +130,7 @@ void main() async {
       expect(
         find.descendant(
           of: find.byKey(const ValueKey('moneyavailable_o450')),
-          matching: find.text('\$1,850'),
+          matching: find.text('\$1,850.00'),
         ),
         findsWidgets,
       );
@@ -138,7 +138,7 @@ void main() async {
       expect(
         find.descendant(
           of: find.byKey(const ValueKey('moneyavailable_xxo6')),
-          matching: find.text('\$1,850'),
+          matching: find.text('\$1,850.00'),
         ),
         findsWidgets,
       );
@@ -146,7 +146,7 @@ void main() async {
       expect(
         find.descendant(
           of: find.byKey(const ValueKey('monthlyincome_6v4l')),
-          matching: find.text('\$6,200'),
+          matching: find.text('\$6,200.00'),
         ),
         findsWidgets,
       );
@@ -165,7 +165,7 @@ void main() async {
       expect(
         find.descendant(
           of: find.byKey(const ValueKey('monthlyCosts_wqhm')),
-          matching: find.text('\$3,050'),
+          matching: find.text('\$3,050.00'),
         ),
         findsWidgets,
       );
@@ -203,11 +203,11 @@ void main() async {
       expect(
         find.descendant(
           of: find.byKey(const ValueKey('monthlyincome_6v4l')),
-          matching: find.text('\$7,200'),
+          matching: find.text('\$7,200.00'),
         ),
-        findsOneWidget,
+        findsWidgets,
       );
-    }, skip: true);
+    });
   });
 
   group('US 1', () {
@@ -236,7 +236,7 @@ void main() async {
         const Duration(milliseconds: 3000),
       );
       expect(find.byKey(const ValueKey('IconButton_g968')), findsOneWidget);
-    }, skip: true);
+    });
 
     testWidgets('Scenario 2', (WidgetTester tester) async {
       _overrideOnError();
@@ -263,7 +263,7 @@ void main() async {
         const Duration(milliseconds: 3000),
       );
       expect(find.byKey(const ValueKey('Signup-Email_sare')), findsWidgets);
-    }, skip: true);
+    });
 
     testWidgets('Scenario 3', (WidgetTester tester) async {
       _overrideOnError();
@@ -289,7 +289,7 @@ void main() async {
         const Duration(milliseconds: 3000),
       );
       expect(find.byKey(const ValueKey('Confirm-Password_9eqp')), findsWidgets);
-    }, skip: true);
+    });
 
     testWidgets('Scenario 4', (WidgetTester tester) async {
       _overrideOnError();
@@ -312,7 +312,7 @@ void main() async {
       );
       expect(
           find.byKey(const ValueKey('Confirm-Password_9eqp')), findsOneWidget);
-    }, skip: true);
+    });
   });
 }
 
