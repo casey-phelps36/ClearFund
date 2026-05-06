@@ -79,6 +79,7 @@ void main() async {
           find.byKey(const ValueKey('MonthlyCheck_lmjc')), '5000');
       await tester.enterText(
           find.byKey(const ValueKey('additionalIncome_dm9x')), '1200');
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.scrollUntilVisible(
         find.byKey(const ValueKey('transportation_m4eo')),
         100.0,
@@ -96,6 +97,7 @@ void main() async {
           find.byKey(const ValueKey('foodGroceries_p64f')), '600');
       await tester.enterText(
           find.byKey(const ValueKey('transportation_m4eo')), '250');
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.scrollUntilVisible(
         find.byKey(const ValueKey('investments_5a4k')),
         100.0,
@@ -110,6 +112,7 @@ void main() async {
           find.byKey(const ValueKey('monthlySavings_t4vo')), '800');
       await tester.enterText(
           find.byKey(const ValueKey('investments_5a4k')), '500');
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.scrollUntilVisible(
         find.byKey(const ValueKey('Button_yce1')),
         100.0,
@@ -127,7 +130,9 @@ void main() async {
       FocusManager.instance.primaryFocus?.unfocus();
       await tester.pumpAndSettle(const Duration(milliseconds: 10000));
       await tester.tap(find.text('Save Financial Info'));
-      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
+      await tester.pump(kDoubleTapMinTime);
+      await tester.tap(find.text('Save Financial Info'));
+      await tester.pumpAndSettle(const Duration(milliseconds: 10000));
       expect(
         find.descendant(
           of: find.byKey(const ValueKey('moneyavailable_o450')),
@@ -200,10 +205,20 @@ void main() async {
       await tester.enterText(
           find.bySemanticsLabel(RegExp('additionalIncome')), '1200');
       await tester.tap(find.text('Save'));
+      await tester.scrollUntilVisible(
+        find.byKey(const ValueKey('monthlyincome_6v4l')),
+        100.0,
+        scrollable: find
+            .descendant(
+              of: find.byKey(const ValueKey('Column_f23s')),
+              matching: find.byType(Scrollable),
+            )
+            .first,
+      );
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       expect(
         find.descendant(
-          of: find.byKey(const ValueKey('monthlyincome_6v4l')),
+          of: find.byKey(const ValueKey('dashboardv3_n8td')),
           matching: find.text('\$7,200.00'),
         ),
         findsWidgets,

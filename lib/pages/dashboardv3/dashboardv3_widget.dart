@@ -330,6 +330,7 @@ class _Dashboardv3WidgetState extends State<Dashboardv3Widget> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(28.0, 0.0, 28.0, 0.0),
                   child: SingleChildScrollView(
+                    key: ValueKey('Column_f23s'),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
