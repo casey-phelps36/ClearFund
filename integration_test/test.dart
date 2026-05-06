@@ -126,8 +126,6 @@ void main() async {
           find.byKey(const ValueKey('monthlyDebt_n557')), '400');
       await tester.pumpAndSettle(const Duration(milliseconds: 10000));
       await tester.tap(find.byKey(const ValueKey('Button_yce1')));
-      await tester.pump(kDoubleTapMinTime);
-      await tester.tap(find.byKey(const ValueKey('Button_yce1')));
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       expect(
         find.descendant(
