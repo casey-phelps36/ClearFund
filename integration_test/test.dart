@@ -124,8 +124,9 @@ void main() async {
           find.byKey(const ValueKey('totalDebt_h6yk')), '12000');
       await tester.enterText(
           find.byKey(const ValueKey('monthlyDebt_n557')), '400');
+      FocusManager.instance.primaryFocus?.unfocus();
       await tester.pumpAndSettle(const Duration(milliseconds: 10000));
-      await tester.tap(find.byKey(const ValueKey('Button_yce1')));
+      await tester.tap(find.text('Save Financial Info'));
       await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       expect(
         find.descendant(
@@ -198,8 +199,8 @@ void main() async {
           find.bySemanticsLabel(RegExp('MonthlyCheck')), '6000');
       await tester.enterText(
           find.bySemanticsLabel(RegExp('additionalIncome')), '1200');
-      await tester.tap(find.bySemanticsLabel(RegExp('incomeSaveCom')));
-      await tester.pumpAndSettle(const Duration(milliseconds: 10000));
+      await tester.tap(find.text('Save'));
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       expect(
         find.descendant(
           of: find.byKey(const ValueKey('monthlyincome_6v4l')),
