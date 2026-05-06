@@ -68,6 +68,7 @@ void main() async {
       ));
       await GoogleFonts.pendingFonts();
 
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
       await tester.tap(find.descendant(
         of: find.byKey(const ValueKey('navBar_80i6')),
         matching: find.byWidgetPredicate((Widget widget) =>
@@ -78,6 +79,16 @@ void main() async {
           find.byKey(const ValueKey('MonthlyCheck_lmjc')), '5000');
       await tester.enterText(
           find.byKey(const ValueKey('additionalIncome_dm9x')), '1200');
+      await tester.scrollUntilVisible(
+        find.byKey(const ValueKey('transportation_m4eo')),
+        100.0,
+        scrollable: find
+            .descendant(
+              of: find.byKey(const ValueKey('Column_wetv')),
+              matching: find.byType(Scrollable),
+            )
+            .first,
+      );
       await tester.enterText(find.byKey(const ValueKey('rent_f26p')), '1500');
       await tester.enterText(
           find.byKey(const ValueKey('utilities_bac4')), '300');
@@ -85,15 +96,20 @@ void main() async {
           find.byKey(const ValueKey('foodGroceries_p64f')), '600');
       await tester.enterText(
           find.byKey(const ValueKey('transportation_m4eo')), '250');
+      await tester.scrollUntilVisible(
+        find.byKey(const ValueKey('investments_5a4k')),
+        100.0,
+        scrollable: find
+            .descendant(
+              of: find.byKey(const ValueKey('Column_wetv')),
+              matching: find.byType(Scrollable),
+            )
+            .first,
+      );
       await tester.enterText(
           find.byKey(const ValueKey('monthlySavings_t4vo')), '800');
       await tester.enterText(
           find.byKey(const ValueKey('investments_5a4k')), '500');
-      await tester.enterText(
-          find.byKey(const ValueKey('totalDebt_h6yk')), '12000');
-      await tester.enterText(
-          find.byKey(const ValueKey('financeInfo_jq67')), '400');
-      await tester.pumpAndSettle(const Duration(milliseconds: 10000));
       await tester.scrollUntilVisible(
         find.byKey(const ValueKey('Button_yce1')),
         100.0,
@@ -104,6 +120,11 @@ void main() async {
             )
             .first,
       );
+      await tester.enterText(
+          find.byKey(const ValueKey('totalDebt_h6yk')), '12000');
+      await tester.enterText(
+          find.byKey(const ValueKey('monthlyDebt_n557')), '400');
+      await tester.pumpAndSettle(const Duration(milliseconds: 10000));
       await tester.tap(find.byKey(const ValueKey('Button_yce1')));
       await tester.pump(kDoubleTapMinTime);
       await tester.tap(find.byKey(const ValueKey('Button_yce1')));
@@ -150,6 +171,7 @@ void main() async {
         ),
         findsWidgets,
       );
+      await tester.pumpAndSettle(const Duration(milliseconds: 5000));
     });
 
     testWidgets('widget finance update', (WidgetTester tester) async {

@@ -2003,6 +2003,7 @@ class _FinanceInfoWidgetState extends State<FinanceInfoWidget> {
                                         ),
                                   ),
                                   TextFormField(
+                                    key: ValueKey('monthlyDebt_n557'),
                                     controller:
                                         _model.monthlyDebtTextController,
                                     focusNode: _model.monthlyDebtFocusNode,
